@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapCodex 프로젝트 - AI 기반 설계-시공-정산 자동화 플랫폼 구축 실행 보고서</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f9fafb;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+            color: #1a202c;
+        }
+        
+        h1 { font-size: 2.5rem; }
+        h2 { font-size: 2rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.5rem; }
+        h3 { font-size: 1.5rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 0.3rem; }
+        h4 { font-size: 1.2rem; }
+        
+        p, ul, ol, table {
+            margin-bottom: 1rem;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f7fafc;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        ul, ol {
+            padding-left: 2rem;
+        }
+        
+        ul { list-style-type: disc; }
+        ol { list-style-type: decimal; }
+        
+        blockquote {
+            border-left: 4px solid #cbd5e0;
+            padding-left: 1rem;
+            font-style: italic;
+            margin: 1rem 0;
+            color: #4a5568;
+        }
+        
+        code {
+            font-family: monospace;
+            background-color: #f7fafc;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+        }
+        
+        .version-badge {
+            background-color: #4299e1;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .table-of-contents {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .table-of-contents h2 {
+            margin-top: 0;
+            border-bottom: none;
+        }
+        
+        .table-of-contents ul {
+            margin-bottom: 0;
+        }
+        
+        .table-of-contents a {
+            color: #4a5568;
+            text-decoration: none;
+        }
+        
+        .table-of-contents a:hover {
+            color: #2b6cb0;
+            text-decoration: underline;
+        }
+        
+        .navbar {
+            background-color: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: #2d3748;
+        }
+        
+        .page-divider {
+            height: 4px;
+            background-color: #4299e1;
+            margin: 3rem 0;
+            width: 100%;
+        }
+        
+        .highlight {
+            background-color: #ebf8ff;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border-left: 4px solid #4299e1;
+            margin: 1rem 0;
+        }
+        
+        .card {
+            background-color: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .slide {
+            background-color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            padding: 2rem;
+            margin: 2rem 0;
+            page-break-inside: avoid;
+        }
+        
+        .slide-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: #2b6cb0;
+        }
+        
+        .slide-content {
+            font-size: 1.2rem;
+        }
+        
+        .agent-card {
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            background-color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .agent-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #2b6cb0;
+        }
+        
+        .agent-role {
+            font-style: italic;
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+        }
+        
+        .agent-quote {
+            border-left: 3px solid #4299e1;
+            padding-left: 0.75rem;
+            font-style: italic;
+            color: #4a5568;
+            margin-top: 0.75rem;
+        }
+        
+        @media print {
+            body {
+                background-color: white;
+            }
+            
+            .no-print {
+                display: none;
+            }
+            
+            .container {
+                max-width: 100%;
+                width: 100%;
+                padding: 0;
+                margin: 0;
+            }
+            
+            .page-divider {
+                height: 2px;
+                margin: 2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-white shadow-md py-6">
+        <div class="container mx-auto flex flex-col items-center justify-center">
+            <div class="text-center">
+                <h1 class="text-4xl font-bold text-gray-800">SnapCodex 프로젝트</h1>
+                <p class="text-xl text-gray-600 mt-2">AI 기반 설계-시공-정산 자동화 플랫폼 구축 실행 보고서</p>
+                <div class="mt-4 flex items-center justify-center">
+                    <span class="version-badge mr-2">버전 1.2</span>
+                    <span class="text-sm text-gray-500">최종 업데이트: 2025년 4월 19일</span>
+                </div>
+            </div>
+            <div class="mt-6 text-gray-600">
+                <p>EO팀 / 디자인인사이트</p>
+                <p>총괄 책임: 이오 (EO) 팀장</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- IR 발표용 요약 슬라이드 -->
+    <section class="container mx-auto mt-10 mb-16">
+        <h2 class="text-center text-2xl font-bold text-blue-700 mb-6">IR 발표용 요약</h2>
+        
+        <div class="slide">
+            <div class="slide-title">SnapCodex: 설계와 현실을 잇는 지능적인 흐름</div>
+            <div class="slide-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">비전</h3>
+                        <p>사람과 AI가 조화롭게 협력하여 건축 및 인테리어 디자인의 새로운 가치를 창출하는 플랫폼</p>
+                        
+                        <h3 class="font-bold text-lg mb-2 mt-4">핵심 가치 제안</h3>
+                        <p>"기존 도면과 사진만으로 설계부터 정산까지, AI가 자동으로 연결하고 관리해주는 가장 빠르고 쉬운 스마트 디자인 협업 플랫폼"</p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">주요 기능</h3>
+                        <ul class="list-disc pl-5">
+                            <li><strong>CodexHub:</strong> 도면 파일 분석 및 데이터 구조화</li>
+                            <li><strong>SnapPrice:</strong> 이미지 기반 비용 예측</li>
+                            <li><strong>Delta Agent:</strong> 설계-시공 변경 감지</li>
+                            <li><strong>Echo Agent:</strong> 알림 및 리포팅</li>
+                            <li><strong>Sage Agent:</strong> 데이터 거버넌스</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide">
+            <div class="slide-title">시장 기회 및 문제 해결</div>
+            <div class="slide-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">해결하는 문제점</h3>
+                        <ul class="list-disc pl-5">
+                            <li>설계-시공-정산 간 정보 단절 및 비효율성</li>
+                            <li>정보의 파편화 및 비표준화</li>
+                            <li>반복적이고 비효율적인 업무</li>
+                            <li>부정확한 초기 견적 및 예산 관리 어려움</li>
+                            <li>현장 변경 사항 관리의 복잡성</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">시장 타겟</h3>
+                        <p>중소규모 디자인 사무소, 건설사, 시공팀, 프리랜서, 공공 발주처</p>
+                        
+                        <h3 class="font-bold text-lg mb-2 mt-4">경쟁 차별화</h3>
+                        <ul class="list-disc pl-5">
+                            <li>BIM 대비: 경량성, 접근성, 낮은 도입 장벽</li>
+                            <li>조달 시스템 대비: 민간 시장 중심, 디자인-견적 통합</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide">
+            <div class="slide-title">비즈니스 모델 & 실행 계획</div>
+            <div class="slide-content">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">수익 모델</h3>
+                        <ul class="list-disc pl-5">
+                            <li>SaaS 구독 기반 (Free/Trial, Standard, Pro, Enterprise)</li>
+                            <li>API 제공 및 연동 수수료</li>
+                            <li>엔터프라이즈 솔루션 및 컨설팅</li>
+                            <li>공공기관 전용 패키지</li>
+                        </ul>
+                        
+                        <h3 class="font-bold text-lg mb-2 mt-4">예상 개발 예산</h3>
+                        <p>MVP 개발 기준: <strong>3천만~5천만원</strong></p>
+                    </div>
+                    <div>
+                        <h3 class="font-bold text-lg mb-2">주요 마일스톤</h3>
+                        <ul class="list-disc pl-5">
+                            <li><strong>MVP 개발:</strong> 10-12주</li>
+                            <li><strong>90일 챌린지:</strong> 내부 도입 및 검증</li>
+                            <li><strong>Phase 2:</strong> MVP 출시 후 3-6개월</li>
+                            <li><strong>Phase 3:</strong> 고도화 (6-12개월)</li>
+                        </ul>
+                        
+                        <h3 class="font-bold text-lg mb-2 mt-4">핵심 성공 요인</h3>
+                        <p>AI 기술의 완성도, 사용자 중심 UX/UI, 팀 실행력, 지속적 개선</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 목차 -->
+    <section class="container mx-auto mt-12">
+        <div class="table-of-contents">
+            <h2 class="text-xl font-bold mb-4">목 차</h2>
+            <ul class="ml-4">
+                <li class="mb-2"><a href="#sec1">1. 프로젝트 개요</a></li>
+                <li class="mb-2"><a href="#sec2">2. 브랜드 아이덴티티 및 비전</a></li>
+                <li class="mb-2"><a href="#sec3">3. 시장 분석 및 포지셔닝</a></li>
+                <li class="mb-2"><a href="#sec4">4. 사용자 페르소나 및 시나리오</a></li>
+                <li class="mb-2"><a href="#sec5">5. 플랫폼 기능 상세 설계</a></li>
+                <li class="mb-2"><a href="#sec6">6. UX/UI 설계</a></li>
+                <li class="mb-2"><a href="#sec7">7. EO팀 구성 및 협업 모델</a>
+                    <ul class="ml-5 mt-1">
+                        <li class="mb-1"><a href="#sec7-3">7.3. AI Agent 역할 및 페르소나</a></li>
+                        <li class="mb-1"><a href="#sec7-4">7.4. 협업 프로세스 및 도구</a></li>
+                        <li class="mb-1"><a href="#sec7-5">7.5. 사람-AI 협업 시나리오</a></li>
+                    </ul>
+                </li>
+                <li class="mb-2"><a href="#sec8">8. 기술 아키텍처 및 개발 스택</a></li>
+                <li class="mb-2"><a href="#sec9">9. 사업 모델 및 수익화 전략</a></li>
+                <li class="mb-2"><a href="#sec10">10. 실행 계획 및 로드맵</a></li>
+                <li class="mb-2"><a href="#sec11">11. 리스크 관리</a></li>
+                <li class="mb-2"><a href="#sec12">12. 결론 및 제언</a></li>
+                <li class="mb-2"><a href="#appendix">부록</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- 본문 내용 -->
+    <main class="container mx-auto mt-16">
+        <!-- 7.3. AI Agent 역할 및 페르소나 -->
+        <section id="sec7-3" class="mb-12">
+            <h3 class="text-2xl font-bold mb-4">7.3. AI Agent 역할 및 페르소나</h3>
+            <p class="mb-4">EO팀의 중요한 구성원인 AI 에이전트들은 각각 명확한 역할과 특성을 가진다:</p>
+            
+            <div class="agent-card">
+                <div class="agent-name">Codex (The Archivist & Interpreter)</div>
+                <div class="agent-role">역할: 도면(.cdx, .dwg 등) 및 관련 디자인 파일 분석, 데이터 구조화, 정보 추출</div>
+                <p>특성: 꼼꼼하고 분석적이며, 복잡한 정보 속에서 패턴과 구조를 찾아내는 데 능숙함. 방대한 데이터를 정확하게 처리.</p>
+                <div class="agent-quote">"저는 당신의 설계 도면 속 숨겨진 정보를 찾아 구조화해 드립니다."</div>
+            </div>
+            
+            <div class="agent-card">
+                <div class="agent-name">Snapper (The Estimator & Trend Analyst)</div>
+                <div class="agent-role">역할: 이미지(사진, 시안) 분석 기반 스타일 분류, 마감재 인식, 예상 비용 예측</div>
+                <p>특성: 빠르고 직관적이며, 시각적 정보로부터 비용과 관련된 통찰력을 제공. 트렌드에 민감.</p>
+                <div class="agent-quote">"사진 한 장이면 충분합니다. 스타일과 예상 비용을 바로 알려드릴게요."</div>
+            </div>
+            
+            <div class="agent-card">
+                <div class="agent-name">Delta (The Watcher & Change Tracker)</div>
+                <div class="agent-role">역할: 설계 데이터와 실제 현장(사진) 비교, 변경 사항 감지, 차이점 분석 및 기록</div>
+                <p>특성: 예리하고 관찰력이 뛰어나며, 미세한 변화도 놓치지 않으려 함. 객관적인 비교 결과 제공.</p>
+                <div class="agent-quote">"설계와 현장이 다르다면, 제가 가장 먼저 알려드리겠습니다."</div>
+            </div>
+            
+            <div class="agent-card">
+                <div class="agent-name">Echo (The Communicator & Reporter)</div>
+                <div class="agent-role">역할: 주요 이벤트 알림 발송, 데이터 요약 및 보고서 자동 생성, 팀 내 정보 공유 지원</div>
+                <p>특성: 명확하고 간결하며, 필요한 정보를 적시에 전달하는 데 집중. 신속하고 효율적인 소통 지원.</p>
+                <div class="agent-quote">"중요한 업데이트나 요청 사항, 제가 요약해서 알려드릴게요."</div>
+            </div>
+            
+            <div class="agent-card">
+                <div class="agent-name">Sage (The Guardian & Governor)</div>
+                <div class="agent-role">역할: 데이터 버전 관리, 접근 권한 통제, 감사 로그 기록, 플랫폼 정책 및 데이터 보안 관리</div>
+                <p>특성: 신중하고 원칙을 중시하며, 시스템의 안정성과 데이터의 무결성을 지키는 역할.</p>
+                <div class="agent-quote">"모든 기록은 안전하게 보관되고, 규칙에 따라 관리되어야 합니다."</div>
+            </div>
+        </section>
+        
+        <!-- 7.4. 협업 프로세스 및 도구 -->
+        <section id="sec7-4" class="mb-12">
+            <h3 class="text-2xl font-bold mb-4">7.4. 협업 프로세스 및 도구</h3>
+            
+            <div class="card">
+                <h4 class="text-xl font-semibold mb-3">프로세스</h4>
+                <ul class="list-disc pl-6 mb-4">
+                    <li>애자일(Agile) 스크럼 방식 기반 운영 (2주 단위 스프린트)</li>
+                    <li>일일 스탠드업 미팅 (Daily Stand-up): 진행 상황 공유, 이슈 논의 (사람 + (필요시) AI 상태 보고)</li>
+                    <li>스프린트 계획(Sprint Planning), 리뷰(Review), 회고(Retrospective) 정기 진행</li>
+                    <li>칸반(Kanban) 보드를 활용한 작업 관리 시각화</li>
+                    <li>AI 모델 개선 및 피드백 반영 프로세스 별도 운영</li>
+                </ul>
+            </div>
+            
+            <div class="card mt-6">
+                <h4 class="text-xl font-semibold mb-3">주요 협업 도구</h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <p><strong>커뮤니케이션:</strong> Slack (팀 채널, AI 알림 연동)</p>
+                        <p><strong>문서 및 지식 관리:</strong> Notion (회의록, 기획 문서, AI 모델 학습 노트, Sage 연동)</p>
+                        <p><strong>작업 관리:</strong> Jira 또는 Trello (이슈 트래킹, 칸반 보드)</p>
+                    </div>
+                    <div>
+                        <p><strong>디자인:</strong> Figma (UI/UX 디자인, 프로토타이핑)</p>
+                        <p><strong>코드 관리:</strong> GitHub (버전 관리, 코드 리뷰)</p>
+                        <p><strong>클라우드 플랫폼:</strong> AWS/GCP/Azure (인프라 관리 및 모니터링)</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 7.5. 사람-AI 협업 시나리오 -->
+        <section id="sec7-5" class="mb-12">
+            <h3 class="text-2xl font-bold mb-4">7.5. 사람-AI 협업 시나리오 (애니메이션 콘티 요약)</h3>
+            
+            <p class="mb-4">EO팀의 독특한 협업 방식을 효과적으로 전달하기 위해 짧은 애니메이션 제작을 기획하였다. 주요 콘티는 다음과 같다:</p>
+            
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <p class="font-semibold mb-2">[시작]</p>
+                        <p>디자이너(이디자)가 스케치하는 모습</p>
+                        <p class="text-blue-600 italic mt-2">"디자인은 사람의 감각으로 시작..."</p>
+                    </div>
+                    
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <p class="font-semibold mb-2">[분석]</p>
+                        <p>스케치/도면이 Codex에게 전달되고, AI가 분석하여 구조화하는 장면 (데이터 시각화)</p>
+                        <p class="text-blue-600 italic mt-2">"Codex가 구조를 읽고..."</p>
+                    </div>
+                    
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <p class="font-semibold mb-2">[견적]</p>
+                        <p>레퍼런스 사진을 Snapper가 분석하여 예상 비용 범위를 보여주는 장면</p>
+                        <p class="text-blue-600 italic mt-2">"Snapper가 가치를 예측합니다."</p>
+                    </div>
+                    
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <p class="font-semibold mb-2">[현장]</p>
+                        <p>현장소장(박소장)이 찍은 사진을 Delta가 분석하여 설계와의 차이를 발견하고 알림(Echo)을 보내는 장면</p>
+                        <p class="text-blue-600 italic mt-2">"Delta는 변화를 놓치지 않고, Echo는 모두에게 알립니다."</p>
+                    </div>
+                    
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <p class="font-semibold mb-2">[협업]</p>
+                        <p>EO팀 멤버들과 AI 아이콘들이 함께 모니터 앞에서 논의하며 웃는 모습</p>
+                        <p class="text-blue-600 italic mt-2">"사람은 결정하고, AI는 지원합니다."</p>
+                    </div>
+                    
+                    <div class="border-l-4 border-blue-500 pl-4">
+                        <p class="font-semibold mb-2">[마무리]</p>
+                        <p>SnapCodex 로고와 태그라인 등장</p>
+                        <p class="text-blue-600 italic mt-2">"SnapCodex: 설계와 현실을 잇는 지능적인 흐름."</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 8. 기술 아키텍처 및 개발 스택 -->
+        <section id="sec8" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">8. 기술 아키텍처 및 개발 스택</h2>
+            
+            <h3 class="text-2xl font-bold mb-4">8.1. 클라우드 기반 아키텍처 설계</h3>
+            <p class="mb-4">SnapCodex는 초기 확장성, 유연성, 관리 효율성, 최신 AI 기술 접근성 등을 고려하여 100% 클라우드 기반(Cloud-Native)으로 설계한다.</p>
+            
+            <h4 class="text-xl font-bold mb-3">8.1.1. On-premise vs. Cloud 비교 및 선택 근거</h4>
+            
+            <div class="overflow-x-auto mb-6">
+                <table class="min-w-full bg-white border">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border">항목</th>
+                            <th class="py-2 px-4 border">On-premise (구축형)</th>
+                            <th class="py-2 px-4 border">Cloud (클라우드 기반)</th>
+                            <th class="py-2 px-4 border">선택 근거 (SnapCodex)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">초기 비용</td>
+                            <td class="py-2 px-4 border">높음 (서버, 라이선스 구매)</td>
+                            <td class="py-2 px-4 border">낮음 (사용한 만큼 지불)</td>
+                            <td class="py-2 px-4 border">초기 투자 부담 감소</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">확장성</td>
+                            <td class="py-2 px-4 border">제한적 (물리적 증설 필요)</td>
+                            <td class="py-2 px-4 border">용이 (필요에 따라 즉시 확장/축소)</td>
+                            <td class="py-2 px-4 border">사용자 증가 및 데이터량 증가에 유연 대응</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">유지보수</td>
+                            <td class="py-2 px-4 border">직접 관리 (인력, 시간 소요)</td>
+                            <td class="py-2 px-4 border">클라우드 제공사 관리 (인프라 부담↓)</td>
+                            <td class="py-2 px-4 border">핵심 서비스 개발 집중 가능</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">최신 기술</td>
+                            <td class="py-2 px-4 border">직접 도입 및 설정 필요</td>
+                            <td class="py-2 px-4 border">다양한 AI/ML 서비스 즉시 활용 가능</td>
+                            <td class="py-2 px-4 border">AI 기능 개발 및 통합 용이</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">안정성/보안</td>
+                            <td class="py-2 px-4 border">자체 구축 역량에 따라 상이</td>
+                            <td class="py-2 px-4 border">전문적인 인프라 및 보안 서비스 제공</td>
+                            <td class="py-2 px-4 border">높은 수준의 안정성 및 보안 확보 용이</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">구축 속도</td>
+                            <td class="py-2 px-4 border">오래 걸림</td>
+                            <td class="py-2 px-4 border">빠름</td>
+                            <td class="py-2 px-4 border">빠른 MVP 출시 및 시장 검증 가능</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <p class="font-semibold">결론:</p>
+            <p class="mb-6">클라우드 기반 아키텍처는 SnapCodex의 비즈니스 목표(빠른 시장 진입, 유연한 확장, AI 기술 활용) 달성에 압도적으로 유리하다.</p>
+            
+            <h4 class="text-xl font-bold mb-3">8.1.2. 컴퓨팅 리소스 및 비용 관리 전략 (오토스케일링, 서버리스)</h4>
+            
+            <div class="card">
+                <h5 class="font-bold mb-2">핵심 원칙:</h5>
+                <p class="mb-3">사용량 기반 과금(Pay-as-you-go) 모델을 최대한 활용하여 비용 효율성을 극대화한다.</p>
+                
+                <h5 class="font-bold mb-2">서버리스 아키텍처 적극 활용:</h5>
+                <ul class="list-disc pl-6 mb-3">
+                    <li>파일 처리(Codex 파싱), 이미지 분석(SnapPrice), 변경 감지(Delta), 알림(Echo) 등 이벤트 기반 또는 간헐적으로 실행되는 기능은 AWS Lambda, Google Cloud Functions, Azure Functions 등 서버리스 컴퓨팅 활용.</li>
+                    <li>→ 유휴 상태일 때 비용 발생 최소화, 트래픽 증가 시 자동 확장.</li>
+                </ul>
+                
+                <h5 class="font-bold mb-2">컨테이너 오케스트레이션 활용 (필요시):</h5>
+                <ul class="list-disc pl-6 mb-3">
+                    <li>지속적인 서비스 제공이 필요하거나(예: API Gateway, 인증 서비스), 특정 라이브러리/환경 의존성이 높은 경우 Docker 컨테이너 기반으로 구축하고, Kubernetes(EKS, GKE, AKS) 또는 ECS/Fargate 등을 활용하여 배포 및 관리.</li>
+                    <li>→ 오토스케일링(Auto-scaling) 설정을 통해 부하에 따라 자동으로 컨테이너 수를 조절하여 성능과 비용의 균형 유지.</li>
+                </ul>
+                
+                <h5 class="font-bold mb-2">비용 모니터링 및 최적화:</h5>
+                <p>클라우드 제공사의 비용 관리 도구(AWS Cost Explorer, GCP Billing 등)를 활용하여 서비스별 비용 추적, 예산 설정 및 알림 기능 활용, 정기적인 리소스 사용량 검토 및 최적화 작업 수행 (예: 불필요한 리소스 제거, 예약 인스턴스 활용).</p>
+            </div>
+            
+            <h3 class="text-2xl font-bold mt-8 mb-4">8.2. 제안 기술 스택</h3>
+            <p class="italic text-gray-600 mb-4">(MVP 단계 기준, 향후 변경 가능)</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">프론트엔드 (Frontend)</h4>
+                    <ul class="list-disc pl-6">
+                        <li><strong>React 또는 Next.js:</strong> 컴포넌트 기반 개발 용이성, 풍부한 생태계, SSR(Next.js) 통한 초기 로딩 성능 개선. TypeScript 활용하여 타입 안정성 확보.</li>
+                        <li><strong>상태 관리:</strong> Redux Toolkit 또는 Zustand.</li>
+                        <li><strong>UI 라이브러리:</strong> Material UI, Ant Design 또는 Tailwind CSS 기반 커스텀 디자인 시스템 구축.</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">백엔드 (Backend)</h4>
+                    <h5 class="font-bold mb-2">언어/프레임워크:</h5>
+                    <ul class="list-disc pl-6 mb-3">
+                        <li><strong>Node.js (TypeScript):</strong> 비동기 I/O 처리 성능 우수, 프론트엔드와 동일 언어 사용으로 개발 생산성 향상. Express 또는 NestJS 프레임워크 활용. (주요 API 서버)</li>
+                        <li><strong>Python:</strong> 풍부한 AI/ML 라이브러리(TensorFlow, PyTorch, OpenCV, Scikit-learn 등) 활용 용이. AI 모델 서빙, 데이터 처리 파이프라인 구축에 활용. FastAPI 또는 Flask 프레임워크 활용. (AI 관련 서비스)</li>
+                    </ul>
+                    <p><strong>아키텍처:</strong> 마이크로서비스 아키텍처 (MSA).</p>
+                    <p><strong>API:</strong> RESTful API 또는 GraphQL (필요에 따라). API Gateway 활용 (예: AWS API Gateway).</p>
+                </div>
+                
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">데이터베이스 (Database)</h4>
+                    <ul class="list-disc pl-6">
+                        <li><strong>관계형 DB (RDB):</strong> PostgreSQL 또는 MySQL (AWS RDS, Google Cloud SQL 등 관리형 서비스 활용). 사용자 정보, 프로젝트 메타데이터, 정형 데이터 등 트랜잭션 처리가 중요한 데이터 저장.</li>
+                        <li><strong>NoSQL DB:</strong> MongoDB 또는 DynamoDB. JSON 형태의 Codex 분석 결과, 로그 데이터 등 유연한 스키마가 필요하거나 대규모 읽기/쓰기에 유리한 데이터 저장.</li>
+                        <li><strong>Vector DB (확장 고려):</strong> Milvus, Pinecone 등. 이미지 유사도 검색(SnapPrice), 설계 요소 유사성 분석 등 벡터 임베딩 기반 검색 기능 구현 시 활용.</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">AI/ML 모델</h4>
+                    <ul class="list-disc pl-6">
+                        <li><strong>Computer Vision:</strong> OpenCV, TensorFlow Object Detection API, PyTorch (YOLO, Faster R-CNN 등), (필요시) Google Cloud Vision API, AWS Rekognition 등 상용 API 활용.</li>
+                        <li><strong>NLP (확장 고려):</strong> KoGPT, BERT 등 한국어 모델 (도면 내 텍스트 분석, 사용자 피드백 분석 등).</li>
+                        <li><strong>ML Frameworks:</strong> TensorFlow, PyTorch, Scikit-learn.</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">클라우드 인프라 (Cloud Infrastructure)</h4>
+                    <p class="mb-2"><strong>주요 제공사:</strong> AWS, GCP, Azure 중 내부 역량 및 비용 효율성 고려하여 선택 (예: AWS 기준).</p>
+                    <ul class="list-disc pl-6">
+                        <li><strong>컴퓨팅:</strong> EC2, Lambda, ECS/EKS/Fargate.</li>
+                        <li><strong>스토리지:</strong> S3 (파일 저장), EBS (EC2 볼륨).</li>
+                        <li><strong>데이터베이스:</strong> RDS, DynamoDB.</li>
+                        <li><strong>네트워킹:</strong> VPC, API Gateway, Route 53, CloudFront (CDN).</li>
+                        <li><strong>CI/CD:</strong> GitHub Actions, AWS CodePipeline/CodeBuild/CodeDeploy.</li>
+                        <li><strong>모니터링:</strong> CloudWatch.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-bold mt-8 mb-4">8.3. 데이터 관리 및 보안 전략</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">8.3.1. 데이터 모델링 및 스키마</h4>
+                    <ul class="list-disc pl-6">
+                        <li>각 데이터 유형(사용자, 프로젝트, 도면 분석 결과, 이미지 분석 결과, 변경 내역 등)에 맞는 데이터 모델 정의.</li>
+                        <li>관계형 데이터는 정규화를 통해 데이터 일관성 유지, NoSQL 데이터는 접근 패턴을 고려하여 유연한 스키마 설계.</li>
+                        <li>JSON 스키마를 정의하여 Codex 분석 결과 등 비정형 데이터의 구조 명확화 및 유효성 검증.</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">8.3.2. 접근 제어 (RBAC) 및 암호화</h4>
+                    <ul class="list-disc pl-6">
+                        <li><strong>RBAC (Role-Based Access Control):</strong> 사용자 역할(Admin, Designer, Contractor, Client 등)별로 접근 가능한 데이터 및 기능(CRUD) 권한 세분화.</li>
+                        <li><strong>인증:</strong> JWT(JSON Web Token) 기반 인증 또는 OAuth 2.0 프로토콜 활용. Multi-Factor Authentication(MFA) 도입 고려.</li>
+                        <li><strong>데이터 암호화:</strong>
+                            <ul class="list-disc pl-6 mt-1">
+                                <li><strong>저장 시 암호화 (Encryption at Rest):</strong> 데이터베이스 및 파일 스토리지에 저장되는 모든 민감 데이터 암호화 (클라우드 제공사 관리형 키 또는 고객 관리형 키 사용).</li>
+                                <li><strong>전송 시 암호화 (Encryption in Transit):</strong> 모든 네트워크 통신 구간(클라이언트-서버, 서버-서버)에 SSL/TLS 적용하여 데이터 암호화.</li>
+                            </ul>
+                        </li>
+                        <li><strong>API 보안:</strong> API Key 관리, Rate Limiting, 입력값 유효성 검증, SQL Injection 등 웹 취약점 방어.</li>
+                        <li><strong>보안 감사 및 모니터링:</strong> 접근 로그, 변경 로그 등 감사 추적 기능 구현. 보안 이벤트 모니터링 및 이상 징후 탐지 시스템 구축 (클라우드 보안 서비스 활용).</li>
+                        <li><strong>정기 보안 점검:</strong> 외부 보안 전문가를 통한 모의 해킹 및 취약점 진단 정기 수행.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 9. 사업 모델 및 수익화 전략 -->
+        <section id="sec9" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">9. 사업 모델 및 수익화 전략</h2>
+            
+            <h3 class="text-2xl font-bold mb-4">9.1. 비즈니스 모델: SaaS 구독 기반</h3>
+            <p class="mb-6">SnapCodex의 핵심 비즈니스 모델은 클라우드 기반의 SaaS(Software as a Service) 구독 모델이다. 사용자는 월간 또는 연간 구독료를 지불하고 플랫폼의 기능과 서비스를 이용한다. 이는 안정적인 반복 수익(Recurring Revenue) 확보와 지속적인 서비스 개선 및 고객 관계 관리에 유리하다.</p>
+            
+            <h3 class="text-2xl font-bold mb-4">9.2. 요금제 설계 (티어별 기능 차등)</h3>
+            <p class="mb-4">다양한 사용자 그룹의 니즈와 예산 수준을 고려하여 기능과 사용량에 따라 차등화된 요금제를 제공한다. (세부 가격은 시장 조사 후 결정)</p>
+            
+            <div class="overflow-x-auto mb-6">
+                <table class="min-w-full bg-white border">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border">티어</th>
+                            <th class="py-2 px-4 border">대상 사용자</th>
+                            <th class="py-2 px-4 border">핵심 기능 제공 범위</th>
+                            <th class="py-2 px-4 border">가격대 (예상)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">Free/Trial</td>
+                            <td class="py-2 px-4 border">개인 사용자, 기능 탐색 목적</td>
+                            <td class="py-2 px-4 border">기본 파일 뷰어, 월 제한된 횟수/용량의 Codex 분석 및 SnapPrice 예측 체험</td>
+                            <td class="py-2 px-4 border">무료</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">Standard</td>
+                            <td class="py-2 px-4 border">프리랜서, 소규모 팀 (1-5인)</td>
+                            <td class="py-2 px-4 border">Codex/SnapPrice 핵심 기능 (월 사용량 제한), 프로젝트 관리(제한), 기본 협업 기능</td>
+                            <td class="py-2 px-4 border">월 3~5만원/유저</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">Pro</td>
+                            <td class="py-2 px-4 border">중규모 팀 (5-20인), 전문가</td>
+                            <td class="py-2 px-4 border">Codex/SnapPrice 무제한 또는 대용량, Delta 변경 감지, 고급 리포트, 우선 기술 지원</td>
+                            <td class="py-2 px-4 border">월 7~10만원/유저</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">Enterprise</td>
+                            <td class="py-2 px-4 border">대규모 기업, 공공기관</td>
+                            <td class="py-2 px-4 border">모든 기능 + 맞춤형 기능/통합, 전용 인프라 옵션, API 접근, 강화된 보안/SLA, 컨설팅</td>
+                            <td class="py-2 px-4 border">별도 협의 (문의)</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="highlight">
+                <h4 class="font-bold mb-2">고려사항:</h4>
+                <ul class="list-disc pl-6">
+                    <li><strong>가치 지표 (Value Metric):</strong> 초기에는 사용자 수 기반 과금이 용이하나, 장기적으로는 프로젝트 수, 분석 파일 용량/개수, API 호출 수 등 실제 사용량과 가치에 연동된 지표 도입 검토.</li>
+                    <li><strong>과금 주기:</strong> 월간 구독 및 연간 구독(할인 제공) 옵션 제공.</li>
+                    <li><strong>초기 사용자 확보:</strong> 출시 초기 프로모션, 파트너십 통한 할인 혜택 등 고려.</li>
+                </ul>
+            </div>
+            
+            <h3 class="text-2xl font-bold mt-8 mb-4">9.3. 부가 수익 모델</h3>
+            <p class="mb-4">구독 모델 외에도 다음과 같은 부가적인 수익 창출 기회를 모색한다:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">9.3.1. API 제공 및 연동 수수료</h4>
+                    <ul class="list-disc pl-6">
+                        <li>SnapCodex의 핵심 기능(Codex 파싱, SnapPrice 예측 등)을 API 형태로 외부에 제공하고, 호출 건수 또는 기능 티어에 따라 과금.</li>
+                        <li>타사 서비스(ERP, 건설 관리 솔루션 등)와의 연동을 지원하고, 연동 모듈 사용료 또는 데이터 동기화 수수료 부과.</li>
+                        <li>개발자 포털 운영 및 기술 지원 제공.</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">9.3.2. 엔터프라이즈 솔루션 및 컨설팅</h4>
+                    <ul class="list-disc pl-6">
+                        <li>대규모 기업 또는 특정 요구사항을 가진 고객을 대상으로 플랫폼 커스터마이징, 사내 시스템(On-premise 가능성 포함)과의 통합, 데이터 마이그레이션 등 전문 서비스 제공.</li>
+                        <li>SnapCodex 플랫폼 활용 극대화를 위한 사용자 교육 및 워크플로우 최적화 컨설팅 제공.</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">9.3.3. 공공기관 전용 패키지</h4>
+                    <ul class="list-disc pl-6">
+                        <li>공공기관의 보안 요구사항 및 행정 프로세스(예: 조달청 시스템 연동)를 충족하는 전용 패키지 개발 및 제공.</li>
+                        <li>공공 데이터 활용 및 정책 지원 사업 연계 가능성 모색.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p class="text-gray-600 italic mt-4">*(확장 고려: 플랫폼 내 자재 마켓플레이스 운영 수수료, 데이터 분석 기반 부가 서비스 등)*</p>
+        </section>
+        
+        <!-- 10. 실행 계획 및 로드맵 -->
+        <section id="sec10" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">10. 실행 계획 및 로드맵</h2>
+            
+            <h3 class="text-2xl font-bold mb-4">10.1. MVP(최소기능제품) 정의 및 범위</h3>
+            <p class="mb-4">초기 시장 검증 및 핵심 가치 전달을 위해 다음 기능을 포함하는 MVP를 우선 개발한다:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="card">
+                    <ul class="list-disc pl-6">
+                        <li><strong>사용자 관리:</strong> 회원가입, 로그인, 기본 프로필 관리.</li>
+                        <li><strong>프로젝트 관리:</strong> 새 프로젝트 생성, 프로젝트 목록 보기.</li>
+                        <li><strong>CodexHub 핵심:</strong> .cdx, .dwg 파일 업로드 기능, 비동기 파일 파싱 및 주요 정보(공간, 벽, 문, 창, 면적 등) 추출, 분석 결과(JSON, 시각화) 확인 인터페이스.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <ul class="list-disc pl-6">
+                        <li><strong>SnapPrice 핵심:</strong> 이미지(JPG, PNG) 업로드 기능, AI 기반 스타일 분류 및 마감재 인식(제한적), 기본 비용 예측 범위 제공 인터페이스.</li>
+                        <li><strong>기본 연동:</strong> CodexHub 분석 결과(면적 등)를 SnapPrice 예측 시 기본 입력값으로 활용하는 로직.</li>
+                        <li><strong>UI/UX:</strong> 핵심 기능 사용을 위한 기본 웹 인터페이스.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <p class="text-gray-600 italic">*(MVP 제외 기능: Delta 변경 감지 상세, 고급 리포팅, 상세 협업 기능, API 제공, 모바일 앱 등)*</p>
+            
+            <h3 class="text-2xl font-bold mt-8 mb-4">10.2. 개발 마일스톤 및 일정 (10-12주)</h3>
+            <p class="mb-4">MVP 개발은 약 10~12주간 진행되며, 주요 마일스톤은 다음과 같다. (2주 단위 스프린트 가정)</p>
+            
+            <div class="bg-white p-6 rounded-lg shadow-md mb-6">
+                <h4 class="text-lg font-bold mb-4">[그림 10-1: MVP 개발 간트 차트 (예시)]</h4>
+                
+                <div class="overflow-x-auto">
+                    <table class="min-w-full">
+                        <thead>
+                            <tr>
+                                <th class="py-2 px-4 border-b-2 border-gray-300 text-left">단계</th>
+                                <th class="py-2 px-4 border-b-2 border-gray-300 text-left">Week 1-2</th>
+                                <th class="py-2 px-4 border-b-2 border-gray-300 text-left">Week 3-4</th>
+                                <th class="py-2 px-4 border-b-2 border-gray-300 text-left">Week 5-6</th>
+                                <th class="py-2 px-4 border-b-2 border-gray-300 text-left">Week 7-8</th>
+                                <th class="py-2 px-4 border-b-2 border-gray-300 text-left">Week 9-10</th>
+                                <th class="py-2 px-4 border-b-2 border-gray-300 text-left">Week 11-12</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-200">프로젝트 셋업</td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-200">기본 아키텍처 설계</td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-200">인증/사용자 관리</td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-200">CodexHub 백엔드</td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-200">CodexHub UI</td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-200">SnapPrice 백엔드</td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-200">SnapPrice UI</td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-200">통합 테스트</td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                            </tr>
+                            <tr>
+                                <td class="py-2 px-4 border-b border-gray-200">최종 QA & 배포</td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200"></td>
+                                <td class="py-2 px-4 border-b border-gray-200 bg-blue-100"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="mb-6">
+                <ul class="list-disc pl-6">
+                    <li><strong>Week 1-2 (Sprint 1):</strong> 프로젝트 셋업, 기술 스택 확정, 기본 아키텍처 설계, 인증/사용자 관리 기능 개발 시작, UI/UX 와이어프레임 상세화.</li>
+                    <li><strong>Week 3-4 (Sprint 2):</strong> CodexHub 파일 업로드 및 비동기 처리 백엔드 개발, 기본 파싱 로직(PoC 수준) 개발 시작, DB 모델링.</li>
+                    <li><strong>Week 5-6 (Sprint 3):</strong> CodexHub 분석 결과 확인 UI 개발, SnapPrice 이미지 업로드 및 기본 분석 백엔드 개발, AI 모델(기학습 모델 활용 또는 PoC) 연동 시작.</li>
+                    <li><strong>Week 7-8 (Sprint 4):</strong> SnapPrice 예측 결과 UI 개발, Codex-SnapPrice 기본 연동 로직 구현, 핵심 기능 통합 테스트 시작.</li>
+                    <li><strong>Week 9-10 (Sprint 5):</strong> UI/UX 폴리싱, 주요 버그 수정, 성능 테스트 및 최적화(기본 수준).</li>
+                    <li><strong>Week 11-12 (Sprint 6):</strong> 최종 QA, 내부 배포 준비(Staging), 문서화(기본), 내부 90일 챌린지 준비.</li>
+                </ul>
+            </div>
+            
+            <h3 class="text-2xl font-bold mt-8 mb-4">10.3. 예상 개발 예산 (3천만~5천만원)</h3>
+            <p class="mb-4">MVP 개발에 필요한 예상 예산은 다음과 같이 추산된다. (상세 내역은 변동 가능)</p>
+            
+            <div class="overflow-x-auto mb-6">
+                <table class="min-w-full bg-white border">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border">항목</th>
+                            <th class="py-2 px-4 border">세부 내역</th>
+                            <th class="py-2 px-4 border">예상 비용 (만원)</th>
+                            <th class="py-2 px-4 border">비고</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">인건비 (3개월)</td>
+                            <td class="py-2 px-4 border">PM/기획(1), 개발자(2-3), (AI 파트타임)</td>
+                            <td class="py-2 px-4 border">2,000 ~ 3,500</td>
+                            <td class="py-2 px-4 border">내부/외부 인력 구성에 따라 변동</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">클라우드 인프라 비용</td>
+                            <td class="py-2 px-4 border">개발/테스트 환경 서버, 스토리지, DB, API 사용료</td>
+                            <td class="py-2 px-4 border">100 ~ 300</td>
+                            <td class="py-2 px-4 border">사용량 및 서비스 종류에 따라 변동</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">소프트웨어/API 라이선스</td>
+                            <td class="py-2 px-4 border">필요한 상용 라이선스 또는 유료 API (초기)</td>
+                            <td class="py-2 px-4 border">50 ~ 200</td>
+                            <td class="py-2 px-4 border">사용 솔루션에 따라 변동</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">기타/운영비</td>
+                            <td class="py-2 px-4 border">협업 도구, 교육, 테스트 비용 등</td>
+                            <td class="py-2 px-4 border">100 ~ 300</td>
+                            <td class="py-2 px-4 border"></td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">예비비 (Contingency)</td>
+                            <td class="py-2 px-4 border">총 예산의 10~15%</td>
+                            <td class="py-2 px-4 border">250 ~ 700</td>
+                            <td class="py-2 px-4 border">예상치 못한 비용 발생 대비</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">합계</td>
+                            <td class="py-2 px-4 border"></td>
+                            <td class="py-2 px-4 border font-semibold">3,000 ~ 5,000</td>
+                            <td class="py-2 px-4 border"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3 class="text-2xl font-bold mt-8 mb-4">10.4. 90일 챌린지: 팀 내부 도입 및 학습 계획</h3>
+            <p class="mb-4">MVP 개발 완료 후, EO팀 내부 구성원(이오, 이디자, 박코덱스, 박소장) 및 파일럿 사용자(선별된 내부 디자이너/엔지니어)를 대상으로 90일간의 집중 사용 및 학습 챌린지를 진행한다.</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">Phase 1 (1-30일): 기능 익숙해지기 및 기본 피드백</h4>
+                    <p class="font-bold text-sm mb-1">목표:</p>
+                    <p class="mb-2">MVP 핵심 기능 사용법 숙지, 기본적인 버그 및 사용성 이슈 발견.</p>
+                    <p class="font-bold text-sm mb-1">활동:</p>
+                    <p>주 1회 교육 세션, 개인별 테스트 프로젝트 진행, 발견 사항 기록/공유 (Notion, Slack).</p>
+                </div>
+                
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">Phase 2 (31-60일): 실제 업무(과거 프로젝트) 적용 및 심층 피드백</h4>
+                    <p class="font-bold text-sm mb-1">목표:</p>
+                    <p class="mb-2">실제 업무 데이터 적용 시 문제점 파악, AI 모델 정확도/신뢰도 검증, 워크플로우 개선 아이디어 도출.</p>
+                    <p class="font-bold text-sm mb-1">활동:</p>
+                    <p>과거 프로젝트 데이터 활용 분석/견적 수행, 결과 비교 분석, 심층 인터뷰 및 설문 조사.</p>
+                </div>
+                
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">Phase 3 (61-90일): 루틴화 및 고도화 방향 설정</h4>
+                    <p class="font-bold text-sm mb-1">목표:</p>
+                    <p class="mb-2">SnapCodex를 일상 업무 도구로 활용하는 습관 형성, 수집된 피드백 기반 기능 개선 우선순위 결정, Phase 2 로드맵 구체화.</p>
+                    <p class="font-bold text-sm mb-1">활동:</p>
+                    <p>정기 사용 통계 분석, 최종 결과 발표 및 리뷰 워크샵, 차기 버전 기획 착수.</p>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-bold mt-8 mb-4">10.5. 향후 고도화 로드맵 (Phase 2, 3)</h3>
+            <p class="mb-4">MVP 및 90일 챌린지 결과를 바탕으로 다음과 같은 기능 고도화를 단계적으로 추진한다:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">Phase 2 (MVP 출시 후 3-6개월)</h4>
+                    <ul class="list-disc pl-6">
+                        <li><strong>Delta Agent 정식 기능 출시:</strong> 변경 감지 정확도 향상, 자동 정산 연동 기능 강화.</li>
+                        <li><strong>협업 기능 강화:</strong> 프로젝트 멤버 초대/권한 관리, 댓글/어노테이션 기능, 실시간 동시 작업(부분적).</li>
+                        <li><strong>고급 리포팅 및 분석:</strong> 사용자 정의 가능한 대시보드, 프로젝트 성과 분석 리포트.</li>
+                        <li><strong>지원 포맷 확장:</strong> .skp, IFC 등 추가 지원.</li>
+                        <li><strong>AI 모델 성능 개선:</strong> 지속적인 학습 및 튜닝.</li>
+                    </ul>
+                </div>
+                
+                <div class="card">
+                    <h4 class="text-xl font-semibold mb-3">Phase 3 (Phase 2 이후 6-12개월)</h4>
+                    <ul class="list-disc pl-6">
+                        <li><strong>API 공개 및 생태계 구축:</strong> 외부 개발자/서비스 연동 지원.</li>
+                        <li><strong>마켓플레이스 연동:</strong> 자재 정보 연동 및 구매 채널 연계.</li>
+                        <li><strong>모바일 앱 출시:</strong> 현장 사용성 강화.</li>
+                        <li><strong>고급 AI 기능 추가:</strong> 설계 최적화 제안, 하자 예측, 안전 관리 연계 등.</li>
+                        <li><strong>글로벌 서비스 확장:</strong> 다국어 지원, 해외 시장 진출.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+        <!-- 11. 리스크 관리 -->
+        <section id="sec11" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">11. 리스크 관리</h2>
+            
+            <h3 class="text-2xl font-bold mb-4">11.1. 기술적 리스크 및 대응 방안</h3>
+            
+            <div class="overflow-x-auto mb-8">
+                <table class="min-w-full bg-white border">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border">리스크</th>
+                            <th class="py-2 px-4 border">발생 가능성</th>
+                            <th class="py-2 px-4 border">영향력</th>
+                            <th class="py-2 px-4 border">대응 방안</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">AI 모델 정확도/신뢰도 부족</td>
+                            <td class="py-2 px-4 border">중간</td>
+                            <td class="py-2 px-4 border">높음</td>
+                            <td class="py-2 px-4 border">지속적인 데이터 확보 및 학습, 사용자 피드백 루프 강화, 초기에는 AI 제안 + 사용자 검증 병행, 목표 기대치 현실적 설정</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">다양한 도면/이미지 포맷 처리 오류</td>
+                            <td class="py-2 px-4 border">중간</td>
+                            <td class="py-2 px-4 border">중간</td>
+                            <td class="py-2 px-4 border">지원 포맷별 충분한 테스트 케이스 확보, 오류 처리 로직 강화, 사용자 가이드라인 제공</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">대규모 데이터 처리 성능 저하</td>
+                            <td class="py-2 px-4 border">낮음(초기)</td>
+                            <td class="py-2 px-4 border">높음</td>
+                            <td class="py-2 px-4 border">확장 가능한 아키텍처 설계(MSA, 서버리스, 오토스케일링), 성능 병목 구간 조기 식별 및 최적화, DB 인덱싱 최적화</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">클라우드 인프라 장애 또는 보안 사고</td>
+                            <td class="py-2 px-4 border">낮음</td>
+                            <td class="py-2 px-4 border">매우높음</td>
+                            <td class="py-2 px-4 border">고가용성(Multi-AZ) 아키텍처 구성, 정기 백업 및 복구 계획 수립, 클라우드 보안 모범 사례 준수, 보안 모니터링 강화</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">핵심 기술 인력 이탈</td>
+                            <td class="py-2 px-4 border">낮음</td>
+                            <td class="py-2 px-4 border">높음</td>
+                            <td class="py-2 px-4 border">기술 문서화 철저, 코드 리뷰 및 지식 공유 문화 정착, 핵심 기술 내재화 및 이중화 노력</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3 class="text-2xl font-bold mb-4">11.2. 시장 및 경쟁 리스크 대응 방안</h3>
+            
+            <div class="overflow-x-auto mb-8">
+                <table class="min-w-full bg-white border">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border">리스크</th>
+                            <th class="py-2 px-4 border">발생 가능성</th>
+                            <th class="py-2 px-4 border">영향력</th>
+                            <th class="py-2 px-4 border">대응 방안</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">낮은 초기 시장 수용성/인지도 부족</td>
+                            <td class="py-2 px-4 border">중간</td>
+                            <td class="py-2 px-4 border">높음</td>
+                            <td class="py-2 px-4 border">명확한 UVP 전달, 타겟 고객 대상 집중 마케팅, 초기 사용자 대상 인센티브 제공, 성공 사례 적극 발굴/홍보</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">경쟁사(기존 솔루션, 신규 진입자)의 견제</td>
+                            <td class="py-2 px-4 border">중간</td>
+                            <td class="py-2 px-4 border">높음</td>
+                            <td class="py-2 px-4 border">지속적인 기술/기능 차별화, 강력한 사용자 커뮤니티 구축, 핵심 고객 락인(Lock-in) 전략, 파트너십 강화</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">가격 정책 실패 (너무 높거나 낮음)</td>
+                            <td class="py-2 px-4 border">중간</td>
+                            <td class="py-2 px-4 border">높음</td>
+                            <td class="py-2 px-4 border">시장 조사 기반 합리적 가격 설정, 가치 기반 가격 정책, 유연한 요금제 조정, 경쟁사 가격 변동 모니터링</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">부정적인 사용자 피드백 확산</td>
+                            <td class="py-2 px-4 border">낮음</td>
+                            <td class="py-2 px-4 border">중간</td>
+                            <td class="py-2 px-4 border">적극적인 사용자 소통 채널 운영, 피드백 신속 반영 및 개선 노력 투명하게 공개, 고객 지원 강화</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3 class="text-2xl font-bold mb-4">11.3. 운영 및 보안 리스크 대응 방안</h3>
+            
+            <div class="overflow-x-auto mb-6">
+                <table class="min-w-full bg-white border">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border">리스크</th>
+                            <th class="py-2 px-4 border">발생 가능성</th>
+                            <th class="py-2 px-4 border">영향력</th>
+                            <th class="py-2 px-4 border">대응 방안</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">서비스 중단 (Downtime)</td>
+                            <td class="py-2 px-4 border">낮음</td>
+                            <td class="py-2 px-4 border">높음</td>
+                            <td class="py-2 px-4 border">인프라 이중화, 자동 페일오버(Failover) 구성, 배포 전 충분한 테스트, 신속한 장애 대응 프로세스 및 팀 운영</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">데이터 유출 또는 침해 사고</td>
+                            <td class="py-2 px-4 border">낮음</td>
+                            <td class="py-2 px-4 border">매우높음</td>
+                            <td class="py-2 px-4 border">8.3절의 보안 전략 철저 이행, 정기 보안 감사 및 취약점 점검, 임직원 보안 교육 강화, 사고 대응 계획 수립</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">법규/규제 변화 미준수</td>
+                            <td class="py-2 px-4 border">낮음</td>
+                            <td class="py-2 px-4 border">높음</td>
+                            <td class="py-2 px-4 border">개인정보보호법 등 관련 법규 정기 검토 및 반영, 법률 자문 활용, 글로벌 서비스 시 국가별 규제 확인</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">운영 비용 예상 초과</td>
+                            <td class="py-2 px-4 border">중간</td>
+                            <td class="py-2 px-4 border">중간</td>
+                            <td class="py-2 px-4 border">클라우드 비용 모니터링 및 최적화 지속, 자동화 통한 운영 효율화, 예산 관리 강화</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        
+        <!-- 12. 결론 및 제언 -->
+        <section id="sec12" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">12. 결론 및 제언</h2>
+            
+            <h3 class="text-2xl font-bold mb-4">12.1. 프로젝트 성공 요인</h3>
+            <p class="mb-4">SnapCodex 프로젝트의 성공적인 완수와 시장 안착은 다음 핵심 성공 요인(Critical Success Factors)에 달려 있다:</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div class="card">
+                    <h4 class="font-bold mb-2">명확하고 차별화된 가치 제안</h4>
+                    <p>사용자의 실제 Pain Point를 해결하고 기존 솔루션 대비 명확한 이점을 제공하는가?</p>
+                </div>
+                
+                <div class="card">
+                    <h4 class="font-bold mb-2">핵심 AI 기술의 완성도</h4>
+                    <p>CodexHub의 파싱 정확도, SnapPrice의 예측 신뢰도, Delta의 변경 감지 능력이 실무에서 활용 가능한 수준인가?</p>
+                </div>
+                
+                <div class="card">
+                    <h4 class="font-bold mb-2">사용자 중심의 UX/UI</h4>
+                    <p>복잡한 기술을 사용자가 쉽고 편리하게 사용할 수 있도록 구현하였는가?</p>
+                </div>
+                
+                <div class="card">
+                    <h4 class="font-bold mb-2">강력한 팀 실행력</h4>
+                    <p>EO팀의 사람과 AI가 시너지를 내며 계획된 로드맵을 민첩하게 실행하고 문제를 해결해 나가는가?</p>
+                </div>
+                
+                <div class="card md:col-span-2">
+                    <h4 class="font-bold mb-2">지속적인 학습 및 개선</h4>
+                    <p>사용자 피드백과 데이터를 기반으로 플랫폼을 끊임없이 개선하고 시장 변화에 적응하는가?</p>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-bold mt-8 mb-4">12.2. 향후 비전 및 기대 효과 재강조</h3>
+            <p class="mb-4">SnapCodex는 단순한 효율화 도구를 넘어, 건축 및 인테리어 산업의 디지털 전환(Digital Transformation)을 가속화하고 데이터 기반의 새로운 가치 창출을 가능하게 하는 핵심 플랫폼으로 성장할 잠재력을 가지고 있다.</p>
+            
+            <div class="highlight">
+                <h4 class="font-bold mb-2">장기 비전:</h4>
+                <ul class="list-disc pl-6">
+                    <li><strong>설계-시공-정산 통합 생태계 구축:</strong> SnapCodex를 중심으로 다양한 파트너(자재 업체, 금융사, 전문 솔루션 기업 등)가 참여하는 개방형 생태계 조성.</li>
+                    <li><strong>데이터 기반 부가 가치 서비스 확장:</strong> 축적된 데이터를 활용한 설계 트렌드 분석, 자재 추천, 공정 최적화 컨설팅, 리스크 예측 등 지능형 서비스 제공.</li>
+                    <li><strong>글로벌 스마트 디자인 플랫폼 도약:</strong> 국내 시장 성공을 발판으로 해외 시장 진출 및 글로벌 표준 플랫폼으로 성장.</li>
+                </ul>
+            </div>
+            
+            <p class="my-6">우리는 이 플랫폼을 통해 설계자와 시공 전문가들이 <strong>창의성을 마음껏 발휘</strong>하고, 프로젝트의 <strong>성공 가능성을 높이며</strong>, 궁극적으로 <strong>더 나은 공간을 만드는 데 기여</strong>하고자 한다. SnapCodex는 디자인인사이트의 핵심 경쟁력이자 미래 성장 동력이 될 것이다.</p>
+            
+            <h3 class="text-2xl font-bold mt-8 mb-4">12.3. 최종 제언</h3>
+            <p class="mb-4">본 보고서에 제시된 계획을 바탕으로 SnapCodex 프로젝트의 MVP 개발을 <strong>즉시 착수할 것을 제언</strong>한다.</p>
+            
+            <p class="mb-4">성공적인 시작과 지속적인 발전을 위해 다음 사항에 집중할 필요가 있다:</p>
+            
+            <div class="mb-6">
+                <ol class="list-decimal pl-6">
+                    <li class="mb-2"><strong>핵심 AI 기술 검증 우선:</strong> MVP 개발 초기 단계에서 Codex, SnapPrice, Delta의 핵심 AI 모델에 대한 기술적 실현 가능성(PoC) 및 초기 성능 검증에 자원을 집중한다.</li>
+                    <li class="mb-2"><strong>사용자 피드백 조기 확보 및 반영:</strong> 정의된 페르소나 그룹을 포함한 잠재 사용자와의 지속적인 소통을 통해 요구사항을 검증하고, 개발 과정에 피드백을 민첩하게 반영한다 (Lean Startup 접근 방식).</li>
+                    <li class="mb-2"><strong>EO팀 협업 모델 실현:</strong> 계획된 사람-AI 협업 프로세스를 실제 운영 환경에서 구현하고, 시행착오를 통해 최적의 시너지 방안을 모색하며 팀 역량을 강화한다.</li>
+                    <li class="mb-2"><strong>명확한 목표 관리 및 성과 측정:</strong> MVP 및 각 개발 단계별로 측정 가능한 목표(KPIs)를 설정하고, 정기적으로 성과를 측정하며 계획을 조정한다.</li>
+                </ol>
+            </div>
+            
+            <p class="text-center font-bold text-lg mb-4">EO팀은 SnapCodex라는 혁신적인 도전을 성공으로 이끌 충분한 역량과 열정을 가지고 있다. 본 보고서가 그 여정의 명확한 나침반이 되기를 기대한다.</p>
+        </section>
+        
+        <!-- 부록 -->
+        <section id="appendix" class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">부록</h2>
+            
+            <h3 class="text-2xl font-bold mb-4">A. 용어집</h3>
+            <div class="overflow-x-auto mb-8">
+                <table class="min-w-full bg-white border">
+                    <thead>
+                        <tr>
+                            <th class="py-2 px-4 border">용어</th>
+                            <th class="py-2 px-4 border">설명</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">AI (Artificial Intelligence)</td>
+                            <td class="py-2 px-4 border">인공지능</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">API (Application Programming Interface)</td>
+                            <td class="py-2 px-4 border">애플리케이션 프로그래밍 인터페이스</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">BIM (Building Information Modeling)</td>
+                            <td class="py-2 px-4 border">빌딩 정보 모델링</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">.cdx</td>
+                            <td class="py-2 px-4 border">디자인인사이트 고유 설계 파일 포맷 (가정)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">.dwg</td>
+                            <td class="py-2 px-4 border">AutoCAD 도면 파일 포맷</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">CodexHub</td>
+                            <td class="py-2 px-4 border">SnapCodex 플랫폼의 디자인 파일 분석 및 데이터 구조화 AI 엔진/모듈</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">SnapPrice</td>
+                            <td class="py-2 px-4 border">SnapCodex 플랫폼의 이미지 기반 비용 예측 AI 엔진/모듈</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">Delta Agent</td>
+                            <td class="py-2 px-4 border">설계-시공 변경 감지 AI 에이전트</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">Echo Agent</td>
+                            <td class="py-2 px-4 border">알림 및 리포팅 AI 에이전트</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">Sage Agent</td>
+                            <td class="py-2 px-4 border">데이터 거버넌스 및 보안 AI 에이전트</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">EO팀</td>
+                            <td class="py-2 px-4 border">SnapCodex 프로젝트 담당팀 (사람+AI)</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">JSON (JavaScript Object Notation)</td>
+                            <td class="py-2 px-4 border">데이터 교환 형식</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">MVP (Minimum Viable Product)</td>
+                            <td class="py-2 px-4 border">최소기능제품</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">MSA (Microservices Architecture)</td>
+                            <td class="py-2 px-4 border">마이크로서비스 아키텍처</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">PoC (Proof of Concept)</td>
+                            <td class="py-2 px-4 border">기술 검증</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">RBAC (Role-Based Access Control)</td>
+                            <td class="py-2 px-4 border">역할 기반 접근 제어</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">SaaS (Software as a Service)</td>
+                            <td class="py-2 px-4 border">서비스형 소프트웨어</td>
+                        </tr>
+                        <tr>
+                            <td class="py-2 px-4 border font-semibold">UVP (Unique Value Proposition)</td>
+                            <td class="py-2 px-4 border">고유 가치 제안</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <h3 class="text-2xl font-bold mb-4">B. 상세 기술 스택 명세</h3>
+            <p class="text-gray-600 italic mb-4">*(선택된 기술 스택의 구체적인 버전, 라이브러리 목록, API 명세서 초안 등 상세 내용 추가)*</p>
+            
+            <h3 class="text-2xl font-bold mb-4">C. 상세 페르소나 프로필</h3>
+            <p class="text-gray-600 italic mb-4">*(각 페르소나에 대한 더 상세한 배경, 목표, 니즈, Pain Point, 기술 숙련도, 사용 시나리오 등 상세 프로필 추가)*</p>
+            
+            <h3 class="text-2xl font-bold mb-4">D. 참고 자료 및 문헌</h3>
+            <p class="text-gray-600 italic mb-4">*(시장 조사 보고서, 기술 백서, 경쟁사 분석 자료, 참고 논문/기사 등의 목록 추가)*</p>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-16">
+        <div class="container mx-auto text-center">
+            <p>© 2025 디자인인사이트 EO팀. All Rights Reserved.</p>
+            <p class="mt-2 text-gray-400">이 문서는 프로젝트 내부 검토용으로 작성되었습니다.</p>
+            <div class="mt-4">
+                <a href="#" class="text-blue-300 hover:text-blue-500 mx-2">연락처</a>
+                <a href="#" class="text-blue-300 hover:text-blue-500 mx-2">서비스 정보</a>
+                <a href="#" class="text-blue-300 hover:text-blue-500 mx-2">개인정보처리방침</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 인터랙티브 데모 링크 (6.4 섹션에 추가) -->
+    <div id="demo-prototype" class="fixed bottom-5 right-5 bg-blue-600 text-white p-3 rounded-full shadow-lg cursor-pointer hover:bg-blue-700 transition-all z-50 no-print">
+        <a href="https://webflow.com/made-in-webflow/website/snapcodex-demo" target="_blank" class="flex items-center">
+            <span>데모 체험</span>
+            <i class="fas fa-external-link-alt ml-2"></i>
+        </a>
+    </div>
+
+    <script>
+        // 부드러운 스크롤 기능
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
