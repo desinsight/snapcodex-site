@@ -1,0 +1,1475 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SnapCodex 프로젝트 - AI 기반 설계-시공-정산 자동화 플랫폼 구축 실행 보고서</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            color: #333;
+            line-height: 1.6;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            padding: 2rem;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+            margin-top: 1.5em;
+            margin-bottom: 0.5em;
+        }
+
+        h1 {
+            font-size: 2.25rem;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.3em;
+            margin-top: 1em;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            border-bottom: 1px solid #e9ecef;
+            padding-bottom: 0.3em;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+        }
+
+        h4 {
+            font-size: 1.25rem;
+        }
+
+        p {
+            margin-bottom: 1em;
+        }
+
+        ul, ol {
+            margin-bottom: 1em;
+            padding-left: 2em;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1em;
+        }
+
+        table, th, td {
+            border: 1px solid #dee2e6;
+        }
+
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f8f9fa;
+        }
+
+        .image-placeholder {
+            background-color: #f8f9fa;
+            border: 1px dashed #ced4da;
+            padding: 2rem;
+            margin: 1rem 0;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        .image-container {
+            margin: 1.5rem 0;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .image-caption {
+            margin-top: 0.5rem;
+            text-align: center;
+            color: #6c757d;
+            font-style: italic;
+            font-size: 0.9rem;
+        }
+
+        .table-placeholder {
+            background-color: #f8f9fa;
+            border: 1px dashed #ced4da;
+            padding: 2rem;
+            margin: 1rem 0;
+            text-align: center;
+            color: #6c757d;
+        }
+
+        .cover-logo {
+            max-width: 200px;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .cover-page {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .version-badge {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            margin-left: 0.5rem;
+        }
+
+        .demo-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 1rem 0;
+            transition: background-color 0.3s;
+        }
+
+        .demo-link:hover {
+            background-color: #27ae60;
+        }
+
+        .summary-slide {
+            background-color: #f1f8ff;
+            border-left: 4px solid #3498db;
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .toc {
+            background-color: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 2rem 0;
+        }
+
+        .toc-header {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .toc a {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .toc a:hover {
+            text-decoration: underline;
+        }
+        
+        .section-divider {
+            border-top: 1px dashed #e9ecef;
+            margin: 3rem 0;
+        }
+        
+        .persona-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .persona-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        
+        .persona-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 25px;
+            background-color: #e9ecef;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: #6c757d;
+        }
+        
+        .persona-name {
+            font-weight: bold;
+            font-size: 1.25rem;
+        }
+        
+        .persona-info {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        
+        .persona-story {
+            font-style: italic;
+            color: #495057;
+            background-color: #f8f9fa;
+            padding: 1rem;
+            border-left: 3px solid #6c757d;
+            margin: 1rem 0;
+        }
+        
+        .feature-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .feature-icon {
+            font-size: 2rem;
+            color: #3498db;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-title {
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .risk-table td:nth-child(2), 
+        .risk-table td:nth-child(3) {
+            text-align: center;
+        }
+        
+        .high {
+            color: #e74c3c;
+            font-weight: bold;
+        }
+        
+        .medium {
+            color: #f39c12;
+        }
+        
+        .low {
+            color: #2ecc71;
+        }
+        
+        .version-history {
+            margin: 2rem 0;
+        }
+        
+        .version-item {
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .version-date {
+            font-size: 0.875rem;
+            color: #6c757d;
+        }
+        
+        .ir-slide {
+            background-color: #f8f9fb;
+            border-radius: 10px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+            margin: 2rem 0;
+            padding: 2rem;
+        }
+        
+        .ir-slide-title {
+            font-size: 1.75rem;
+            font-weight: bold;
+            text-align: center;
+            color: #3498db;
+            margin-bottom: 1.5rem;
+        }
+        
+        .ir-slide-content {
+            font-size: 1.1rem;
+        }
+        
+        .agent-card {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            background-color: #fff;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .agent-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            background-color: #3498db;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-right: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .agent-details {
+            flex: 1;
+        }
+        
+        .agent-name {
+            font-weight: bold;
+            font-size: 1.25rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .agent-subtitle {
+            font-style: italic;
+            color: #6c757d;
+            margin-bottom: 0.8rem;
+        }
+        
+        .agent-description {
+            margin-bottom: 0.8rem;
+        }
+        
+        .agent-quote {
+            background-color: #f8f9fa;
+            border-left: 3px solid #3498db;
+            padding: 0.8rem;
+            font-style: italic;
+            color: #495057;
+        }
+        
+        .interactive-demo {
+            background-color: #f1f9f5;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .interactive-demo-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #27ae60;
+        }
+        
+        .demo-section {
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            margin: 1rem 0;
+            padding: 1.5rem;
+            background-color: white;
+        }
+        
+        .demo-section-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .demo-upload-box {
+            border: 2px dashed #ced4da;
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin: 1rem 0;
+            transition: border-color 0.3s;
+        }
+        
+        .demo-upload-box:hover {
+            border-color: #3498db;
+            cursor: pointer;
+        }
+        
+        .demo-slider {
+            width: 100%;
+            margin: 1rem 0;
+        }
+        
+        .demo-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+        
+        .demo-option {
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .demo-option:hover, .demo-option.active {
+            background-color: #3498db;
+            color: white;
+            border-color: #3498db;
+        }
+        
+        .demo-result {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .feedback-form {
+            margin-top: 1.5rem;
+        }
+        
+        .emoji-row {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .emoji-option {
+            font-size: 2rem;
+            cursor: pointer;
+            transition: transform 0.2s;
+            user-select: none;
+        }
+        
+        .emoji-option:hover {
+            transform: scale(1.2);
+        }
+        
+        .architecture-diagram {
+            width: 100%;
+            max-width: 900px;
+            margin: 2rem auto;
+            display: block;
+        }
+        
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            background-color: #e9ecef;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: -3px;
+        }
+        
+        .timeline-item {
+            padding: 10px 40px;
+            position: relative;
+            width: 50%;
+            box-sizing: border-box;
+        }
+        
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            right: -10px;
+            top: 15px;
+            border-radius: 50%;
+            background-color: white;
+            border: 4px solid #3498db;
+            z-index: 1;
+        }
+        
+        .timeline-item.left {
+            left: 0;
+        }
+        
+        .timeline-item.right {
+            left: 50%;
+        }
+        
+        .timeline-item.left::after {
+            right: -10px;
+        }
+        
+        .timeline-item.right::after {
+            left: -10px;
+        }
+        
+        .timeline-content {
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .timeline-title {
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        @media screen and (max-width: 600px) {
+            .timeline::after {
+                left: 31px;
+            }
+            
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+            
+            .timeline-item.right {
+                left: 0;
+            }
+            
+            .timeline-item.left::after, .timeline-item.right::after {
+                left: 21px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 표지 -->
+        <div class="cover-page">
+            <div class="image-container">
+                <img src="https://cdn.jsdelivr.net/gh/feathericons/feather@4.29.0/icons/code.svg" alt="SnapCodex Logo" class="cover-logo">
+            </div>
+            <h1 class="text-4xl my-8">SnapCodex 프로젝트</h1>
+            <h2 class="text-2xl mb-16">AI 기반 설계-시공-정산 자동화 플랫폼 구축 실행 보고서</h2>
+            <p class="my-8">EO팀 / 디자인인사이트</p>
+            <p>보고서 작성일: 2025년 4월 19일 (실제 생성 시점 기준)</p>
+            <p>총괄 책임: 이오 (EO) 팀장</p>
+        </div>
+        
+        <!-- 버전 정보 -->
+        <div class="version-history">
+            <h3>버전 관리 <span class="version-badge">v1.0</span></h3>
+            <div class="version-item">
+                <h4>v1.0 <span class="version-date">2023-04-19</span></h4>
+                <p>초기 보고서 완성</p>
+            </div>
+            <div class="version-item">
+                <h4>v0.9 <span class="version-date">2023-04-10</span></h4>
+                <p>주요 내용 초안 작성 및 내부 검토</p>
+            </div>
+            <div class="version-item">
+                <h4>v0.5 <span class="version-date">2023-03-25</span></h4>
+                <p>보고서 구조 및 기본 프레임 설계</p>
+            </div>
+        </div>
+        
+        <!-- IR 발표용 요약 슬라이드 -->
+        <div class="ir-slides">
+            <h3>IR 발표용 요약 슬라이드</h3>
+            
+            <div class="ir-slide">
+                <div class="ir-slide-title">SnapCodex: 설계와 현실을 잇는 지능적인 흐름</div>
+                <div class="ir-slide-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold mb-2">비전</h4>
+                            <p>사람과 AI가 조화롭게 협력하여 건축 및 인테리어 디자인의 새로운 가치를 창출하는 플랫폼</p>
+                            
+                            <h4 class="font-bold mt-4 mb-2">핵심 가치 제안</h4>
+                            <p>"기존 도면과 사진만으로 설계부터 정산까지, AI가 자동으로 연결하고 관리해주는 가장 빠르고 쉬운 스마트 디자인 협업 플랫폼"</p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">주요 기능</h4>
+                            <ul class="list-disc pl-5">
+                                <li><strong>CodexHub:</strong> 도면 파일 분석 및 데이터 구조화</li>
+                                <li><strong>SnapPrice:</strong> 이미지 기반 비용 예측</li>
+                                <li><strong>Delta Agent:</strong> 설계-시공 변경 감지</li>
+                                <li><strong>Echo Agent:</strong> 알림 및 리포팅</li>
+                                <li><strong>Sage Agent:</strong> 데이터 거버넌스</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ir-slide">
+                <div class="ir-slide-title">시장 기회 및 경쟁 분석</div>
+                <div class="ir-slide-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold mb-2">핵심 Pain Points</h4>
+                            <ul class="list-disc pl-5">
+                                <li>설계-시공-정산 간 정보 단절 및 비효율성</li>
+                                <li>반복적이고 비효율적인 업무</li>
+                                <li>부정확한 초기 견적 및 예산 관리 어려움</li>
+                                <li>현장 변경 사항 관리의 복잡성</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">경쟁 차별화 요소</h4>
+                            <ul class="list-disc pl-5">
+                                <li><strong>BIM 대비:</strong> 낮은 도입 장벽, 높은 접근성</li>
+                                <li><strong>AI 자동화:</strong> 복잡한 수작업 대체</li>
+                                <li><strong>디자인-비용 실시간 연동:</strong> 즉각적 피드백</li>
+                                <li><strong>현장 중심 솔루션:</strong> 실시간 변경 대응</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="ir-slide">
+                <div class="ir-slide-title">비즈니스 모델 & 실행 계획</div>
+                <div class="ir-slide-content">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="font-bold mb-2">수익 모델</h4>
+                            <ul class="list-disc pl-5">
+                                <li><strong>SaaS 구독 기반:</strong> Free/Trial, Standard, Pro, Enterprise</li>
+                                <li><strong>API 제공 및 연동 수수료</strong></li>
+                                <li><strong>엔터프라이즈 솔루션 및 컨설팅</strong></li>
+                                <li><strong>공공기관 전용 패키지</strong></li>
+                            </ul>
+                            
+                            <h4 class="font-bold mt-4 mb-2">예상 개발 예산</h4>
+                            <p>MVP 개발 기준: <strong>3천만~5천만원</strong></p>
+                        </div>
+                        <div>
+                            <h4 class="font-bold mb-2">개발 로드맵</h4>
+                            <ul class="list-disc pl-5">
+                                <li><strong>MVP 개발:</strong> 10-12주</li>
+                                <li><strong>90일 챌린지:</strong> 내부 도입 및 검증</li>
+                                <li><strong>Phase 2:</strong> MVP 출시 후 3-6개월</li>
+                                <li><strong>Phase 3:</strong> 고도화 (6-12개월)</li>
+                            </ul>
+                            
+                            <h4 class="font-bold mt-4 mb-2">핵심 성공 요인</h4>
+                            <p>AI 기술의 완성도, 사용자 중심 UX/UI, EO팀 실행력, 지속적 개선</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 요약 슬라이드 -->
+        <div class="summary-slide">
+            <h3>보고서 요약</h3>
+            <p><strong>프로젝트명:</strong> SnapCodex - AI 기반 설계-시공-정산 자동화 플랫폼</p>
+            <p><strong>핵심 기능:</strong> Codex(설계 파일 분석), SnapPrice(비용 예측), Delta(변경 감지)</p>
+            <p><strong>개발 기간:</strong> MVP 10-12주 (약 3천만~5천만원 예산)</p>
+            <p><strong>기대 효과:</strong> 설계-시공-정산 과정의 효율화, 데이터 기반 의사결정, 비용 절감</p>
+            <p><strong>사업 모델:</strong> SaaS 구독 기반 (Standard/Pro/Enterprise 티어)</p>
+        </div>
+        
+        <!-- 인터랙티브 데모 바로가기 -->
+        <div class="interactive-demo">
+            <div class="interactive-demo-title">SnapCodex 인터랙티브 데모</div>
+            <p class="text-center">아래 데모를 통해 SnapCodex의 핵심 기능을 직접 체험해보세요!</p>
+            
+            <!-- 탭 네비게이션 -->
+            <div class="flex justify-center mt-4 mb-6">
+                <div class="demo-options">
+                    <div class="demo-option active" id="tab-upload">파일 업로드 & 분석</div>
+                    <div class="demo-option" id="tab-estimate">자동 견적</div>
+                    <div class="demo-option" id="tab-viewer">3D 뷰어</div>
+                    <div class="demo-option" id="tab-feedback">피드백</div>
+                </div>
+            </div>
+            
+            <!-- 데모 섹션 -->
+            <div class="demo-section" id="section-upload">
+                <div class="demo-section-title">프로젝트 업로드 & 분석</div>
+                <p>설계 파일(.cdx, .dwg 등)을 업로드하면 AI가 자동으로 공간 데이터를 분석합니다.</p>
+                <div class="demo-upload-box" id="upload-box">
+                    <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-2"></i>
+                    <p>파일을 여기에 드래그하거나 클릭하여 업로드</p>
+                    <p class="text-sm text-gray-500 mt-2">지원 형식: .cdx, .dwg, .skp</p>
+                </div>
+                <div class="demo-result hidden" id="result-upload">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-check-circle text-green-500 mr-2"></i>
+                        <span>파일 분석 완료!</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <p><strong>공간 수:</strong> 5개</p>
+                            <p><strong>총 면적:</strong> 120.5㎡</p>
+                            <p><strong>벽체 길이:</strong> 58.2m</p>
+                        </div>
+                        <div>
+                            <p><strong>문:</strong> 7개</p>
+                            <p><strong>창:</strong> 4개</p>
+                            <p><strong>마감재 종류:</strong> 6종</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="demo-section hidden" id="section-estimate">
+                <div class="demo-section-title">자동 견적 & 옵션 선택</div>
+                <p>분석된 데이터를 기반으로 예상 비용을 계산하고, 다양한 옵션에 따라 시뮬레이션할 수 있습니다.</p>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">마감 등급 선택</label>
+                    <div class="demo-options">
+                        <div class="demo-option active">일반</div>
+                        <div class="demo-option">고급</div>
+                        <div class="demo-option">프리미엄</div>
+                    </div>
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">공사 난이도 (단순 → 복잡)</label>
+                    <input type="range" class="demo-slider" min="1" max="5" value="3">
+                </div>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">공기 조정 (여유 → 촉박)</label>
+                    <input type="range" class="demo-slider" min="1" max="5" value="3">
+                </div>
+                
+                <div class="demo-result">
+                    <h3 class="font-bold text-lg mb-3">예상 견적 결과</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="text-center p-3 bg-blue-50 rounded">
+                            <p class="text-gray-600">최소 예상</p>
+                            <p class="text-xl font-bold">4,200만원</p>
+                        </div>
+                        <div class="text-center p-3 bg-blue-100 rounded">
+                            <p class="text-gray-600">기본 예상</p>
+                            <p class="text-2xl font-bold">4,850만원</p>
+                        </div>
+                        <div class="text-center p-3 bg-blue-50 rounded">
+                            <p class="text-gray-600">최대 예상</p>
+                            <p class="text-xl font-bold">5,600만원</p>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <button class="demo-link">견적서 다운로드</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="demo-section hidden" id="section-viewer">
+                <div class="demo-section-title">.cxd 파일 3D Viewer</div>
+                <p>클라이언트 유형에 따라 다양한 3D 결과물을 확인할 수 있습니다.</p>
+                
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">클라이언트 유형 선택</label>
+                    <div class="demo-options">
+                        <div class="demo-option active">주거</div>
+                        <div class="demo-option">상업</div>
+                        <div class="demo-option">교육</div>
+                        <div class="demo-option">의료</div>
+                    </div>
+                </div>
+                
+                <div class="image-container">
+                    <img src="https://images.unsplash.com/photo-1536183922588-166604504d5e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="3D 모델 뷰어 예시">
+                    <p class="image-caption">주거용 3D 모델 시뮬레이션</p>
+                </div>
+                
+                <div class="mt-4 text-center">
+                    <button class="demo-link">전체화면으로 보기</button>
+                </div>
+            </div>
+            
+            <div class="demo-section hidden" id="section-feedback">
+                <div class="demo-section-title">사용자 피드백 수집</div>
+                <p>체험에 대한 의견을 남겨주시면 SnapCodex 개선에 큰 도움이 됩니다.</p>
+                
+                <div class="feedback-form">
+                    <p class="text-center mb-2">체험 만족도를 이모지로 표현해주세요</p>
+                    <div class="emoji-row">
+                        <div class="emoji-option">😍</div>
+                        <div class="emoji-option">😊</div>
+                        <div class="emoji-option">😐</div>
+                        <div class="emoji-option">😕</div>
+                        <div class="emoji-option">😞</div>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <label class="block text-gray-700 mb-2">의견 또는 개선사항 (선택사항)</label>
+                        <textarea class="w-full border p-2 rounded" rows="4" placeholder="SnapCodex에 대한 의견이나 개선 제안을 자유롭게 남겨주세요."></textarea>
+                    </div>
+                    
+                    <div class="mt-4 text-center">
+                        <button class="demo-link" id="submit-feedback">제출하기</button>
+                    </div>
+                </div>
+                
+                <div class="hidden mt-4 text-center" id="feedback-thanks">
+                    <div class="p-4 bg-green-50 rounded">
+                        <i class="fas fa-check-circle text-green-500 text-xl mb-2"></i>
+                        <p class="font-bold">소중한 의견 감사합니다!</p>
+                        <p class="text-sm">귀하의 피드백은 SnapCodex 개선에 큰 도움이 됩니다.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 목차 -->
+        <div class="toc" id="toc">
+            <div class="toc-header">목 차</div>
+            <ul>
+                <li><a href="#section1">1. 프로젝트 개요</a></li>
+                <li><a href="#section2">2. 브랜드 아이덴티티 및 비전</a></li>
+                <li><a href="#section3">3. 시장 분석 및 포지셔닝</a></li>
+                <li><a href="#section4">4. 사용자 페르소나 및 시나리오</a></li>
+                <li><a href="#section5">5. 플랫폼 기능 상세 설계</a></li>
+                <li><a href="#section6">6. UX/UI 설계</a></li>
+                <li><a href="#section7">7. EO팀 구성 및 협업 모델</a></li>
+                <li><a href="#section8">8. 기술 아키텍처 및 개발 스택</a></li>
+                <li><a href="#section9">9. 사업 모델 및 수익화 전략</a></li>
+                <li><a href="#section10">10. 실행 계획 및 로드맵</a></li>
+                <li><a href="#section11">11. 리스크 관리</a></li>
+                <li><a href="#section12">12. 결론 및 제언</a></li>
+                <li><a href="#appendix">부록</a></li>
+            </ul>
+        </div>
+        
+        <!-- 1. 프로젝트 개요 -->
+        <div class="section-divider"></div>
+        <section id="section1">
+            <h1>1. 프로젝트 개요</h1>
+            
+            <h2>1.1. 프로젝트 정의 및 목표</h2>
+            <p>본 보고서는 디자인인사이트 EO팀이 추진하는 'SnapCodex' 프로젝트의 종합 실행 계획을 담고 있다. SnapCodex는 AI 기술을 활용하여 건축 및 인테리어 디자인 프로세스에서 발생하는 설계, 시공, 정산 간의 정보 단절 및 비효율성을 해결하는 것을 목표로 하는 통합 클라우드 플랫폼이다.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="SnapCodex 컨셉 이미지">
+                <p class="image-caption">그림 1-1: SnapCodex 플랫폼 개념도</p>
+            </div>
+            
+            <p>구체적으로, SnapCodex는 두 가지 핵심 엔진인 CodexHub와 SnapPrice를 기반으로 한다. CodexHub는 다양한 형식의 디자인 파일(.cdx, .dwg 등)을 AI가 이해할 수 있는 구조화된 데이터(JSON)로 자동 변환하고 분석하는 역할을 수행하며, SnapPrice는 현장 사진이나 디자인 시안 이미지를 분석하여 관련 자재, 스타일을 파악하고 예상 공사 비용 범위를 신속하게 예측한다.</p>
+            
+            <p>본 프로젝트의 궁극적인 목표는 다음과 같다:</p>
+            <ul>
+                <li><strong>설계 데이터의 자산화:</strong> 비정형 설계 파일들을 체계적인 디지털 자산으로 변환 및 관리</li>
+                <li><strong>업무 자동화 및 효율 증대:</strong> 반복적인 수량 산출, 견적 작성, 변경 내역 추적 등의 업무를 자동화하여 디자이너 및 관련 실무자의 창의적 업무 집중 지원</li>
+                <li><strong>의사결정 지원 강화:</strong> 데이터 기반의 빠른 견적 예측 및 비용 시뮬레이션을 통해 고객 상담 및 내부 의사결정의 질과 속도 향상</li>
+                <li><strong>협업 강화 및 투명성 제고:</strong> 설계-시공-정산 전 과정에 걸쳐 정보의 흐름을 원활하게 하고, 변경 이력 추적을 통해 투명성을 높여 분쟁 가능성 감소</li>
+            </ul>
+            
+            <h2>1.2. 배경 및 필요성</h2>
+            <p>현재 건축 및 인테리어 산업은 높은 수준의 전문성과 창의성이 요구됨에도 불구하고, 여전히 많은 영역에서 수작업과 단절된 정보 흐름에 의존하고 있다. 디자인 단계에서 생성된 풍부한 정보(도면, 스케치, 모델링 데이터)가 시공 및 견적 단계에서 효율적으로 활용되지 못하고, 각 단계별로 정보가 재가공되거나 누락되는 경우가 빈번하다.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1581922819941-6ab31ab79afc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="건축 설계 프로세스의 현 문제점">
+                <p class="image-caption">그림 1-2: 설계-시공-정산 과정의 단절 및 비효율성</p>
+            </div>
+            
+            <p>특히 다음과 같은 문제점들이 지속적으로 제기되고 있다:</p>
+            <ul>
+                <li><strong>정보의 파편화 및 비표준화:</strong> 설계사무소, 시공사, 자재 업체 등 참여 주체별로 사용하는 도구와 데이터 형식이 달라 정보 호환 및 통합이 어렵다.</li>
+                <li><strong>반복적이고 비효율적인 업무:</strong> 도면 해석, 수량 산출, 견적 작성 등 많은 시간이 소요되는 반복 업무가 디자이너의 창의적 활동을 저해한다.</li>
+                <li><strong>부정확한 초기 견적 및 예산 관리의 어려움:</strong> 초기 상담 단계에서 정확한 비용 예측이 어려워 고객과의 신뢰 관계 구축에 어려움을 겪거나, 프로젝트 진행 중 예산 초과 문제가 발생하기 쉽다.</li>
+                <li><strong>현장 변경 사항 관리의 복잡성:</strong> 시공 현장에서 발생하는 설계 변경 사항이 설계팀, 견적팀, 발주처 등에 신속하고 정확하게 공유되지 않아 공정 지연, 비용 증가, 분쟁의 원인이 된다.</li>
+            </ul>
+            
+            <p>이러한 문제점들을 해결하기 위해, AI 기술을 활용하여 디자인 데이터의 가치를 극대화하고, 전체 프로세스를 유기적으로 연결하는 혁신적인 접근이 필요하다. SnapCodex는 이러한 산업적 요구에 부응하여 탄생한 솔루션이다.</p>
+            
+            <h2>1.3. 기대효과 및 범위</h2>
+            <p>SnapCodex 플랫폼 도입을 통해 다음과 같은 구체적인 기대효과를 예상한다:</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1614624532983-4ce03382d63d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="SnapCodex 기대효과">
+                <p class="image-caption">그림 1-3: SnapCodex 플랫폼 도입 후 프로세스 개선 효과</p>
+            </div>
+            
+            <ul>
+                <li><strong>생산성 향상:</strong> 설계 데이터 분석 및 견적 생성 시간을 획기적으로 단축하여 디자이너 및 실무자의 업무 생산성을 평균 30% 이상 향상시킬 수 있다.</li>
+                <li><strong>비용 절감 및 수익 증대:</strong> 정확한 수량 산출 및 견적 예측을 통해 자재 낭비 및 재시공 비용을 절감하고, 빠른 초기 대응으로 수주 성공률을 높여 수익 증대에 기여한다.</li>
+                <li><strong>고객 만족도 제고:</strong> 신속하고 투명한 정보 제공, 정확한 예산 관리를 통해 고객 신뢰도를 높이고 만족도를 향상시킨다.</li>
+                <li><strong>데이터 기반 의사결정 문화 정착:</strong> 정량적인 데이터와 AI 분석 결과를 바탕으로 보다 합리적이고 객관적인 의사결정을 지원한다.</li>
+                <li><strong>미래 경쟁력 확보:</strong> AI 활용 역량을 내재화하여 급변하는 기술 환경에 대한 적응력을 높이고 지속 가능한 성장의 기반을 마련한다.</li>
+            </ul>
+            
+            <p>본 프로젝트의 범위는 SnapCodex 플랫폼의 MVP(Minimum Viable Product) 개발 및 내부 EO팀 도입을 포함한다. MVP는 CodexHub의 핵심 기능(.cdx, .dwg 기반 데이터 추출), SnapPrice의 핵심 기능(이미지 기반 견적 예측), 그리고 두 엔진의 기본 연동 및 결과 확인 인터페이스를 포함한다. 또한, 현장 변경 사항 감지 기능(Delta Agent)의 프로토타입 개발 및 검증까지를 목표로 한다. 향후 로드맵에 따라 기능 고도화, 사용자 확대, API 개방 등을 단계적으로 추진할 계획이다.</p>
+        </section>
+        
+        <!-- 2. 브랜드 아이덴티티 및 비전 -->
+        <div class="section-divider"></div>
+        <section id="section2">
+            <h1>2. 브랜드 아이덴티티 및 비전</h1>
+            
+            <h2>2.1. 비전 및 철학: 사람과 AI의 협업</h2>
+            <p>SnapCodex의 비전은 '사람과 AI가 조화롭게 협력하여 건축 및 인테리어 디자인의 새로운 가치를 창출하는 것'이다. 우리는 기술이 사람을 대체하는 것이 아니라, 사람의 창의성과 전문성을 더욱 빛나게 하는 강력한 조력자가 될 수 있다고 믿는다.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1580979685822-4b21758d893e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="인간과 AI 협업 개념">
+                <p class="image-caption">그림 2-1: 사람과 AI의 조화로운 협업 비전</p>
+            </div>
+            
+            <p>EO팀의 철학은 다음과 같은 핵심 가치에 기반한다:</p>
+            <ul>
+                <li><strong>인간 중심(Human-Centric):</strong> 모든 기술 개발과 서비스 설계는 최종 사용자인 사람의 경험과 편의를 최우선으로 고려한다. AI는 복잡하고 반복적인 작업을 처리하여 사람이 더 가치 있는 일에 집중할 수 있도록 지원한다.</li>
+                <li><strong>데이터 기반(Data-Driven):</strong> 직관과 경험에 더하여, 객관적인 데이터와 AI 분석 결과를 통해 보다 합리적이고 투명한 의사결정을 추구한다. 디자인 과정에서 생성되는 모든 데이터를 귀중한 자산으로 인식하고 활용한다.</li>
+                <li><strong>연결과 흐름(Connectivity & Flow):</strong> 설계, 견적, 시공, 정산 등 단절되기 쉬운 각 단계의 정보 흐름을 유기적으로 연결하여 전체 프로세스의 효율성과 시너지를 극대화한다.</li>
+                <li><strong>민첩성과 적응성(Agility & Adaptability):</strong> 빠르게 변화하는 시장과 기술 환경에 유연하게 대응한다. 특히 예측 불가능한 현장 상황 변화에 민첩하게 반응하고 피드백을 반영하는 시스템을 지향한다.</li>
+            </ul>
+            
+            <p>우리는 SnapCodex를 통해 디자이너가 상상력을 현실로 만드는 과정이 더욱 즐겁고 효율적이 되기를 바라며, 건설 및 시공 전문가들이 더 나은 환경에서 일할 수 있도록 돕고자 한다. 궁극적으로 사람과 AI가 함께 성장하며 만들어가는 스마트 디자인 생태계를 구축하는 것이 EO팀의 목표이다.</p>
+            
+            <h2>2.2. 브랜드 로고 및 디자인 컨셉</h2>
+            <p>SnapCodex 브랜드는 핵심 기능인 SnapPrice와 CodexHub의 특징을 시각적으로 함축하여 표현한다. 전체적인 디자인 컨셉은 '지능적인 연결(Intelligent Connection)'과 '데이터의 시각화(Data Visualization)'에 중점을 두며, 신뢰감과 기술력을 전달하는 모던하고 심플한 스타일을 지향한다.</p>
+            
+            <h3>2.2.1. Codex 로고</h3>
+            <p>Codex 로고는 디자인 파일의 복잡한 정보를 AI가 해석하여 구조화된 데이터로 변환하고, 이를 안전한 클라우드 환경에서 관리하는 개념을 시각화한다.</p>
+            
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x400/e9f5ff/2c3e50?text=Codex+Logo" alt="Codex 로고 시안">
+                <p class="image-caption">그림 2-2: Codex 로고 시안 (클라우드 + 회로 패턴)</p>
+            </div>
+            
+            <ul>
+                <li><strong>주요 요소:</strong>
+                    <ul>
+                        <li>클라우드 형태: 데이터의 저장, 관리, 접근성을 상징한다.</li>
+                        <li>내부 회로/데이터 패턴: AI의 분석 과정, 정보의 흐름, 구조화된 데이터의 정밀함을 나타낸다.</li>
+                        <li>파란색 계열 컬러: 신뢰성, 기술력, 안정감을 전달한다.</li>
+                    </ul>
+                </li>
+                <li><strong>브랜드 이미지:</strong> 정확성, 체계성, 시스템화된 정보 관리, 지능적인 데이터 처리.</li>
+            </ul>
+            
+            <h3>2.2.2. SnapPrice 로고</h3>
+            <p>SnapPrice 로고는 사진(스냅샷) 한 장으로 빠르고 직관적으로 비용을 예측하는 서비스의 특징을 나타낸다.</p>
+            
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x400/f0fff4/2c3e50?text=SnapPrice+Logo" alt="SnapPrice 로고 시안">
+                <p class="image-caption">그림 2-3: SnapPrice 로고 시안 (카메라 셔터 + 가격표)</p>
+            </div>
+            
+            <ul>
+                <li><strong>주요 요소:</strong>
+                    <ul>
+                        <li>카메라 셔터/렌즈: 사진 기반 분석이라는 핵심 기능을 직관적으로 보여준다.</li>
+                        <li>가격표/태그 아이콘: 비용 예측 및 견적이라는 서비스의 직접적인 결과물을 상징한다.</li>
+                        <li>역동적인 느낌: 신속한 분석과 빠른 결과 제공을 시각적으로 표현한다.</li>
+                    </ul>
+                </li>
+                <li><strong>브랜드 이미지:</strong> 신속성, 직관성, 실용성, 쉬운 사용성, 예측 가능성.</li>
+            </ul>
+            
+            <h2>2.3. 핵심 태그라인 및 메시지</h2>
+            <p>SnapCodex의 브랜드 가치와 비전을 함축적으로 전달하는 핵심 태그라인 및 메시지는 다음과 같다. 이는 타겟 고객 및 투자자에게 플랫폼의 정체성을 명확하게 각인시키는 역할을 한다.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1523726491678-bf852e717f6a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="SnapCodex 브랜드 메시지">
+                <p class="image-caption">그림 2-4: SnapCodex 브랜드 메시지 시각화</p>
+            </div>
+            
+            <ul>
+                <li><strong>대표 태그라인:</strong>
+                    <ul>
+                        <li><em>"당신이 그린 공간, AI가 그 가치를 말해줍니다."</em></li>
+                        <li><em>"감각으로 설계하고, 데이터로 증명하세요."</em></li>
+                        <li><em>"도면을 읽고, 현장을 기억하는 AI."</em></li>
+                    </ul>
+                </li>
+                <li><strong>핵심 메시지 키워드:</strong>
+                    <ul>
+                        <li>자동화 (Automation): 반복 업무 해방, 효율 극대화</li>
+                        <li>연결 (Connection): 설계-견적-시공-정산의 끊김 없는 흐름</li>
+                        <li>예측 (Prediction): 데이터 기반의 신속하고 정확한 비용 예측</li>
+                        <li>투명성 (Transparency): 변경 이력 관리, 명확한 정산 근거</li>
+                        <li>시너지 (Synergy): 사람의 창의성과 AI의 분석력 결합</li>
+                    </ul>
+                </li>
+                <li><strong>브랜드 스토리 핵심 내러티브:</strong>
+                    <ul>
+                        <li>SnapCodex는 단순한 소프트웨어가 아니다. 우리는 디자이너의 섬세한 스케치 한 장에서부터 시공 현장의 거친 사진 한 장까지, 그 안에 담긴 모든 이야기와 정보를 이해하고 연결하는 지능형 파트너이다. 설계자의 영감이 현실이 되는 과정의 모든 단계를 AI가 조용히 지원하고, 그 흐름 속에서 발생하는 복잡한 문제들을 해결한다. SnapCodex와 함께라면, 당신의 창의성은 더욱 빛나고, 당신의 프로젝트는 더욱 스마트해질 것이다.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        
+        <!-- 3. 시장 분석 및 포지셔닝 -->
+        <div class="section-divider"></div>
+        <section id="section3">
+            <h1>3. 시장 분석 및 포지셔닝</h1>
+            
+            <h2>3.1. 타겟 시장 및 고객 정의</h2>
+            <p>SnapCodex는 건축설계, 인테리어 디자인, 건설 및 시공 관련 산업 전반을 타겟 시장으로 한다. 특히, 기존의 복잡한 BIM 솔루션 도입에 부담을 느끼거나, 설계-견적-시공 간 정보 연계에 어려움을 겪는 중소규모의 디자인 사무소, 건설사, 시공팀 및 관련 프리랜서들을 핵심 고객으로 정의한다. 또한, An 공공 발주처의 행정 효율성 및 투명성 제고 요구에도 부응할 수 있다.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="SnapCodex 타겟 시장">
+                <p class="image-caption">그림 3-1: SnapCodex 타겟 시장 분석</p>
+            </div>
+            
+            <p><em>(추가 상세 분석 내용 필요: 시장 규모 데이터, 세그먼트별 특징 등)</em></p>
+            
+            <h2>3.2. 문제점 분석 (Pain Points)</h2>
+            <p>앞서 언급된 배경 외에도, 타겟 고객들이 현장에서 겪는 구체적인 Pain Point는 다음과 같다:</p>
+            <ul>
+                <li><strong>설계 변경 추적의 어려움:</strong> 프로젝트 진행 중 발생하는 빈번한 설계 변경 사항이 관련자들에게 제때 공유되지 않거나 누락되어 혼선과 오류 발생.</li>
+                <li><strong>수작업 기반 물량 산출의 오류 가능성:</strong> 도면을 기반으로 자재 수량을 산출하는 과정에서 발생하는 인적 오류(누락, 중복, 계산 착오)가 비용 손실로 직결.</li>
+                <li><strong>견적 작성의 시간 소모 및 부정확성:</strong> 유사 프로젝트 경험에 의존하거나 복잡한 엑셀 시트로 견적을 작성하는 데 많은 시간이 소요되며, 누락이나 오류 가능성이 높음.</li>
+                <li><strong>디자인 감성과 예산 간의 괴리:</strong> 고객이 원하는 디자인 스타일과 실제 구현 가능한 예산 사이의 간극을 조율하는 데 어려움을 겪음.</li>
+                <li><strong>시공 현장과의 소통 비효율:</strong> 설계자의 의도가 현장 작업자에게 명확히 전달되지 않거나, 현장 상황 변화가 설계팀에 즉각 피드백되지 않아 재작업 발생.</li>
+                <li><strong>정산 과정의 복잡성 및 분쟁 가능성:</strong> 추가 공사, 설계 변경 등에 따른 비용 정산 시 명확한 근거 자료 부족으로 분쟁 발생 소지.</li>
+            </ul>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1542621334-a254cf47733d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="건설 현장의 소통 문제">
+                <p class="image-caption">그림 3-2: 현장-설계-견적 간 소통 단절로 인한 문제점</p>
+            </div>
+            
+            <h2>3.3. 경쟁 환경 분석</h2>
+            <p>SnapCodex는 기존의 BIM 솔루션 및 공공 조달 시스템과 일부 기능적 유사성을 가지지만, 명확한 차별점을 통해 경쟁 우위를 확보하고자 한다.</p>
+            
+            <h3>3.3.1. BIM과의 차별성</h3>
+            <p>BIM(Building Information Modeling)은 3D 모델 기반으로 건축물의 전 생애주기 정보를 통합 관리하는 강력한 솔루션이지만, 높은 도입 비용, 전문 인력 요구, 복잡한 사용성 등으로 인해 특히 중소규모 업체에서는 활용도가 제한적이다.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1565008576549-57cf13a5798e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="BIM과 SnapCodex 비교">
+                <p class="image-caption">그림 3-3: BIM과 SnapCodex의 접근 방식 비교</p>
+            </div>
+            
+            <p>SnapCodex는:</p>
+            <ul>
+                <li><strong>경량성 및 접근성:</strong> 복잡한 3D 모델링 없이 기존 2D 도면(.cdx, .dwg)이나 이미지 파일을 기반으로 AI가 핵심 정보를 추출하고 분석하므로 도입 장벽이 낮고 사용이 용이하다.</li>
+                <li><strong>속도 및 편의성:</strong> 설계 초기 단계부터 빠른 견적 예측 및 시뮬레이션이 가능하며, 현장 변경 사항에 대한 민첩한 대응이 가능하다.</li>
+                <li><strong>AI 기반 자동화:</strong> 수량 산출, 견적 예측, 변경 감지 등 핵심 업무를 AI가 자동화하여 사용자의 부담을 줄여준다.</li>
+            </ul>
+            
+            <h3>3.3.2. 조달청 내역정보화 시스템과의 차별성</h3>
+            <p>조달청 나라장터, KISCON 등 공공 내역정보화 시스템은 표준화된 단가와 품셈을 기반으로 공공 공사의 예산 관리 및 행정 처리에 중점을 둔다. 이는 민간 시장의 다양성과 변동성을 반영하기 어렵고, 주로 행정적 관점에서 활용된다.</p>
+            
+            <p>SnapCodex는:</p>
+            <ul>
+                <li><strong>민간 시장 중심 및 유연성:</strong> 공공 표준 외 다양한 자재 정보와 시장 가격 변동성을 반영할 수 있으며, 특히 인테리어 등 비정형 디자인 영역에 강점을 가진다.</li>
+                <li><strong>디자인-견적 통합:</strong> 설계 의도와 시각적 결과물(이미지)을 직접적으로 비용과 연결하여 초기 상담 및 의사결정에 실질적인 도움을 준다.</li>
+                <li><strong>현장 중심 실시간 반영:</strong> 현장의 실시간 변경 사항을 감지하고 즉각적으로 견적 및 정산에 반영하는 민첩성을 제공한다.</li>
+            </ul>
+            
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x400/f8f9fa/2c3e50?text=SnapCodex+경쟁+솔루션+비교" alt="SnapCodex 경쟁 솔루션 비교 분석">
+                <p class="image-caption">그림 3-4: SnapCodex와 경쟁 솔루션 비교 분석</p>
+            </div>
+            
+            <h2>3.4. SnapCodex의 고유 가치 제안 (UVP)</h2>
+            <p>SnapCodex는 다음의 고유 가치 제안을 통해 시장에서 차별화된다:</p>
+            
+            <blockquote class="p-4 bg-blue-50 border-l-4 border-blue-500 my-4">
+                <p class="italic">"기존 도면과 사진만으로 설계부터 정산까지, AI가 자동으로 연결하고 관리해주는 가장 빠르고 쉬운 스마트 디자인 협업 플랫폼"</p>
+            </blockquote>
+            
+            <p><strong>핵심 가치:</strong></p>
+            <ul>
+                <li><strong>접근성 높은 AI 자동화:</strong> 복잡한 학습 없이 누구나 쉽게 AI 기반 자동화 혜택 누림</li>
+                <li><strong>디자인-비용 실시간 연동:</strong> 설계 변경과 현장 상황이 즉시 비용에 반영되는 투명성</li>
+                <li><strong>현장 중심 민첩성:</strong> 예측 불가능한 현장 변화에 빠르게 대응하고 기록</li>
+            </ul>
+            
+            <h2>3.5. 전략적 포지셔닝</h2>
+            <p>SnapCodex는 '정확성/복잡성' 축과 '자동화/사용편의성' 축을 기준으로 할 때, 기존 BIM 솔루션의 높은 정확성 일부를 AI로 자동화하면서도 사용 편의성과 속도를 극대화하고, 조달 시스템의 경직성을 탈피하여 민간 시장의 실무자들에게 최적화된 포지션을 목표로 한다.</p>
+            
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x600/f8f9fa/2c3e50?text=SnapCodex+포지셔닝+맵" alt="SnapCodex 포지셔닝 맵">
+                <p class="image-caption">그림 3-5: SnapCodex 포지셔닝 맵 (High Ease-of-Use, High Automation/Speed, Moderate-High Accuracy, 민간/실무 중심)</p>
+            </div>
+        </section>
+        
+        <!-- 4. 사용자 페르소나 및 시나리오 -->
+        <div class="section-divider"></div>
+        <section id="section4">
+            <h1>4. 사용자 페르소나 및 시나리오</h1>
+            
+            <h2>4.1. 페르소나 정의 (6인)</h2>
+            <p>SnapCodex 플랫폼의 성공적인 개발과 도입을 위해서는 실제 사용자들의 니즈와 업무 환경을 깊이 이해하는 것이 필수적이다. 이를 위해 건축, 인테리어, 시공 산업의 주요 이해관계자 6인을 페르소나로 정의하고, 각 페르소나의 목표, 니즈, Pain Point, 그리고 SnapCodex를 통해 얻을 수 있는 기대 효과(PIC: Platform Impact Component)를 분석하였다. 특히 각 페르소나의 생생한 스토리를 추가하여 공감대를 높이고자 하였다.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="사용자 페르소나 개요">
+                <p class="image-caption">그림 4-1: SnapCodex 사용자 페르소나 매핑</p>
+            </div>
+            
+            <h3>4.1.1. 건축설계자 (정아 건축사) - 스토리 포함</h3>
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-avatar"><i class="fas fa-female"></i></div>
+                    <div>
+                        <div class="persona-name">정아 건축사</div>
+                        <div class="persona-info">38세, 여성, 중형 건축사사무소 5년차 건축사</div>
+                    </div>
+                </div>
+                
+                <ul>
+                    <li><strong>목표:</strong> 창의적인 설계안 구현, 시공 오류 최소화, 협력사와의 원활한 소통</li>
+                    <li><strong>니즈:</strong> 설계 변경 이력 자동 관리, BIM 데이터 자동 생성(경량), 도면 기반 자재 정보 자동 연동</li>
+                    <li><strong>Pain Point:</strong> 잦은 설계 변경 요청으로 인한 도면 관리의 번거로움, 시공 단계에서 설계 의도 왜곡, 반복적인 자재 리스트 작성</li>
+                </ul>
+                
+                <div class="persona-story">
+                    "정아 건축사는 오늘도 야근이다. 클라이언트의 갑작스러운 요청으로 어제 완성한 실시설계 도면의 일부를 수정해야 한다. 변경된 벽체 길이와 창호 사양을 반영하고, 관련 구조 도면과 설비 도면까지 확인해야 한다. 문제는 이 변경 사항을 시공사와 감리단, 그리고 견적팀에 다시 정확히 전달하는 일이다. 지난번 프로젝트에서는 변경된 창호 사이즈가 누락되어 현장에서 큰 혼란이 있었다. '도면만 올리면 알아서 변경된 부분 찾아주고, 관련 자재 수량까지 업데이트 해주면 얼마나 좋을까?' 정아는 한숨을 쉬며 생각한다."
+                </div>
+                
+                <div class="bg-green-50 p-3 rounded mt-3">
+                    <p><strong>PIC (Platform Impact Component):</strong></p>
+                    <p>CodexHub에 수정된 .cdx 파일을 올리는 것만으로 변경된 요소(벽체, 창호 등)가 자동으로 감지되고 기록된다. 변경된 정보는 관련자에게 즉시 공유되며, SnapPrice와 연동하여 변경된 자재 수량과 예상 비용 영향까지 빠르게 확인할 수 있다. 이를 통해 정아는 설계 변경 관리에 드는 시간을 줄이고, 시공 오류 가능성을 낮추며, 협업의 투명성을 높일 수 있다.</p>
+                </div>
+            </div>
+            
+            <h3>4.1.2. 담당 주무관 (김주무) - 스토리 포함</h3>
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-avatar"><i class="fas fa-male"></i></div>
+                    <div>
+                        <div class="persona-name">김주무</div>
+                        <div class="persona-info">44세, 남성, 교육청 시설과 10년차 주무관</div>
+                    </div>
+                </div>
+                
+                <ul>
+                    <li><strong>목표:</strong> 예산 내 적정 품질 공사 수행 관리, 행정 절차 준수, 민원 최소화</li>
+                    <li><strong>니즈:</strong> 표준화된 설계/견적 검토 자료, 객관적 예산 집행 근거, 투명한 공사 변경 관리</li>
+                    <li><strong>Pain Point:</strong> 설계사무소마다 다른 도면/내역서 양식으로 인한 검토의 어려움, 전문성 부족으로 인한 기술적 검토 한계, 설계 변경 시 예산 증액/삭감 근거 마련의 복잡성</li>
+                </ul>
+                
+                <div class="persona-story">
+                    "김주무는 책상 위에 쌓인 학교 증축 공사 서류를 바라본다. 설계 변경 요청이 또 들어왔다. 변경된 내역서를 검토해야 하는데, 기존 설계와 정확히 어떤 부분이 얼마나 달라졌는지, 제시된 추가 비용은 적절한지 판단하기가 쉽지 않다. 지난번에는 시공 중에 자재가 바뀌었는데, 나중에 감사에서 지적받아 곤란했던 경험이 있다. '처음 설계부터 변경 내역, 최종 정산까지 한눈에 비교하고 관리할 수 있는 시스템이 있으면 좋겠다. 특히 예산 관련해서는 더 명확한 근거가 필요하다.'"
+                </div>
+                
+                <div class="bg-green-50 p-3 rounded mt-3">
+                    <p><strong>PIC (Platform Impact Component):</strong></p>
+                    <p>SnapCodex를 통해 제출된 설계 데이터(Codex)와 견적(SnapPrice), 그리고 현장 변경 내역(Delta)이 표준화된 형식으로 관리된다. 김주무는 시스템 대시보드를 통해 프로젝트 진행 상황, 설계 변경 이력, 예산 변동 내역을 투명하게 확인하고 비교 검토할 수 있다. 이는 행정 업무의 효율성을 높이고, 객관적인 근거를 바탕으로 예산을 관리하며, 감사 및 민원 대응에 필요한 자료를 확보하는 데 도움을 준다.</p>
+                </div>
+            </div>
+            
+            <h3>4.1.3. 건설사 공무팀 (오건무) - 스토리 포함</h3>
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-avatar"><i class="fas fa-male"></i></div>
+                    <div>
+                        <div class="persona-name">오건무</div>
+                        <div class="persona-info">35세, 남성, 중견 건설사 본사 공무과 대리</div>
+                    </div>
+                </div>
+                
+                <ul>
+                    <li><strong>목표:</strong> 신규 프로젝트 수주 (입찰 경쟁력 확보), 실행 예산 관리 및 원가 절감, 계약 관리</li>
+                    <li><strong>니즈:</strong> 신속하고 정확한 입찰 견적 산출, 설계 도면 기반 물량 자동 산출, 협력업체 견적 비교 분석</li>
+                    <li><strong>Pain Point:</strong> 입찰 준비 시간 부족, 설계 도서의 불명확성으로 인한 견적 오류 위험, 수작업 물량 산출의 비효율성 및 누락 가능성, 실행 예산 초과 리스크</li>
+                </ul>
+                
+                <div class="persona-story">
+                    "오건무 대리는 다음 주 마감인 입찰 건 때문에 정신이 없다. 설계사무소에서 넘어온 도면과 내역서를 바탕으로 실행 견적을 뽑아야 하는데, 도면마다 표현 방식이 조금씩 다르고 누락된 정보도 있어 물량 산출이 까다롭다. 특히 마감재 물량은 직접 캐드에서 면적을 계산해야 하는데, 시간이 너무 오래 걸리고 실수할까 봐 불안하다. '도면만 넣으면 알아서 물량 쫙 뽑아주고, 우리 회사 단가 적용해서 바로 견적 만들어주는 프로그램 없나? 그래야 입찰 가격 경쟁력도 생길 텐데.'"
+                </div>
+                
+                <div class="bg-green-50 p-3 rounded mt-3">
+                    <p><strong>PIC (Platform Impact Component):</strong></p>
+                    <p>CodexHub에 설계 도면(.cdx, .dwg)을 업로드하면 주요 자재(벽체, 바닥, 천장 마감재 등)의 물량이 자동으로 산출된다. 오건무는 이 데이터를 기반으로 SnapPrice 기능을 활용하여 회사의 실행 단가를 적용한 예상 공사비를 빠르게 시뮬레이션하고 입찰 견적서를 작성할 수 있다. 이는 견적의 정확도를 높이고 작업 시간을 단축하여 입찰 경쟁력을 강화하고, 실행 예산 관리의 정확성을 높이는 데 기여한다.</p>
+                </div>
+            </div>
+            
+            <h3>4.1.4. 건설사 현장소장 (박소장) - 스토리 포함</h3>
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-avatar"><i class="fas fa-hard-hat"></i></div>
+                    <div>
+                        <div class="persona-name">박소장</div>
+                        <div class="persona-info">50세, 남성, 중형 건설사 20년 경력 현장소장</div>
+                    </div>
+                </div>
+                
+                <ul>
+                    <li><strong>목표:</strong> 계획된 공기 내 안전하고 품질 높은 시공 완료, 설계-시공 간 불일치 최소화, 원활한 작업 지시 및 공정 관리</li>
+                    <li><strong>니즈:</strong> 변경 사항 반영된 최신 도면 실시간 확인, 작업 구간별 자재 물량 및 위치 정보 확인 용이성, 협력업체와의 명확한 소통 채널</li>
+                    <li><strong>Pain Point:</strong> 현장에서 발견되는 도면 오류 또는 누락, 설계 변경 사항 전달 지연으로 인한 재작업 발생, 작업자에게 구두 또는 종이 도면으로 지시하는 과정의 비효율성 및 오류 가능성, 자재 발주 시점 예측의 어려움</li>
+                </ul>
+                
+                <div class="persona-story">
+                    "박소장은 오늘도 현장을 분주하게 오간다. 어제 설계 변경 통보를 받았는데, 아직 수정된 도면이 현장 작업반장에게 전달되지 않은 것 같다. 이러다 잘못 시공되면 큰일인데. 직접 출력해서 전달하려니 번거롭고, 또 다른 변경이 있을지도 모른다. 작업자들은 작업 구간의 정확한 치수나 마감재 종류를 물어보러 계속 찾아온다. '태블릿 하나로 최신 도면 바로 보고, 필요한 부분 확대해서 치수 확인하고, 자재 뭐 들어가는지까지 바로 알 수 있으면 얼마나 편할까. 변경 사항 생기면 바로 알림도 오고.'"
+                </div>
+                
+                <div class="bg-green-50 p-3 rounded mt-3">
+                    <p><strong>PIC (Platform Impact Component):</strong></p>
+                    <p>박소장은 모바일 기기(태블릿 등)를 통해 SnapCodex 플랫폼에 접속하여 항상 최신 버전의 도면(Codex)을 확인할 수 있다. 특정 작업 구간을 선택하면 관련 상세 정보(치수, 자재 명세 등)가 표시되며, 설계 변경 발생 시 실시간 알림(Echo)을 받는다. 또한, Codex의 물량 정보를 기반으로 자재 발주 시점을 예측하고 관리할 수 있으며, 현장에서 발견된 문제점이나 변경 필요 사항을 사진과 함께 Delta Agent에 기록하여 설계팀 및 공무팀과 즉시 공유할 수 있다. 이는 현장 작업의 정확성을 높이고 공정 관리를 효율화하며 소통 오류를 줄여준다.</p>
+                </div>
+            </div>
+            
+            <h3>4.1.5. 시공자 (김현장) - 스토리 포함</h3>
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-avatar"><i class="fas fa-tools"></i></div>
+                    <div>
+                        <div class="persona-name">김현장</div>
+                        <div class="persona-info">42세, 남성, 전기/타일 전문 시공팀장</div>
+                    </div>
+                </div>
+                
+                <ul>
+                    <li><strong>목표:</strong> 도면대로 정확하고 깔끔하게 시공 완료, 작업 효율성 극대화, 안전사고 예방</li>
+                    <li><strong>니즈:</strong> 명확하고 이해하기 쉬운 작업 지시(도면 정보), 필요한 자재 및 공구 준비 용이성, 현장 변경 사항에 대한 신속한 인지</li>
+                    <li><strong>Pain Point:</strong> 불명확하거나 해독하기 어려운 도면, 잦은 설계 변경으로 인한 작업 혼선, 다른 공정과의 간섭, 현장소장의 구두 지시에 의존해야 하는 경우</li>
+                </ul>
+                
+                <div class="persona-story">
+                    "김현장 팀장은 타일 작업을 준비 중이다. 그런데 어제 현장소장이 뭔가 변경이 있을 거라고 했는데, 아직 정확한 내용을 전달받지 못했다. 기존 도면대로 작업을 시작해야 할지 기다려야 할지 애매하다. 도면을 봐도 이 부분 마감 높이가 정확히 얼마인지, 다른 배관과 간섭은 없는지 확인하기가 까다롭다. '스마트폰으로 내가 작업할 부분 도면 딱 찍으면, 필요한 정보만 크고 명확하게 보여주고, 혹시 변경된 거 있으면 바로 알려주면 좋겠다. 그래야 실수 없이 빨리 끝내지.'"
+                </div>
+                
+                <div class="bg-green-50 p-3 rounded mt-3">
+                    <p><strong>PIC (Platform Impact Component):</strong></p>
+                    <p>김현장은 현장에 비치된 태블릿이나 개인 스마트폰을 통해 SnapCodex의 시공자용 인터페이스에 접근할 수 있다. QR 코드 등을 스캔하여 작업할 구역을 선택하면, 해당 부분의 도면이 작업에 필요한 정보(치수, 자재 종류, 시공 상세 등) 중심으로 간소화되어 표시된다. 설계 변경 시 즉시 알림을 받고 업데이트된 내용을 확인할 수 있어 작업 오류를 줄이고 효율성을 높일 수 있다.</p>
+                </div>
+            </div>
+            
+            <h3>4.1.6. 인테리어 디자이너 (이디자) - 스토리 포함</h3>
+            <div class="persona-card">
+                <div class="persona-header">
+                    <div class="persona-avatar"><i class="fas fa-paint-brush"></i></div>
+                    <div>
+                        <div class="persona-name">이디자</div>
+                        <div class="persona-info">33세, 여성, 프리랜서 인테리어 디자이너 겸 소규모 스튜디오 운영</div>
+                    </div>
+                </div>
+                
+                <ul>
+                    <li><strong>목표:</strong> 고객의 니즈와 예산을 만족시키는 감각적인 디자인 제안 및 구현, 시공 과정에서 디자인 의도 유지, 원활한 고객 소통</li>
+                    <li><strong>니즈:</strong> 디자인 시안 기반의 빠른 예산 예측, 다양한 자재 및 스타일에 따른 비용 비교 시뮬레이션, 고객과의 효과적인 커뮤니케이션 도구, 포트폴리오 및 과거 프로젝트 데이터 관리</li>
+                    <li><strong>Pain Point:</strong> 고객 상담 시 디자인 컨셉과 예산 사이의 간극 조율 어려움, 견적 산출의 복잡성과 시간 소모, 시공 과정에서의 디자인 변경 또는 누락으로 인한 고객 불만, 과거 프로젝트 자료 검색 및 재활용의 어려움</li>
+                </ul>
+                
+                <div class="persona-story">
+                    "이디자 실장은 새로운 고객과의 미팅을 앞두고 있다. 고객이 원하는 스타일의 레퍼런스 사진 몇 장을 받았는데, 이 정도 느낌으로 하려면 예산이 얼마나 필요할지 가늠하기가 어렵다. 대략적으로라도 빨리 알려줘야 하는데, 일일이 자재 가격 알아보고 견적 내려면 시간이 꽤 걸린다. 지난번에는 예산을 너무 낮게 불렀다가 나중에 공사비가 많이 늘어나 고객과 마찰이 있었다. '사진만 딱 보여주면, AI가 알아서 스타일 분석하고 대략적인 견적 범위라도 뽑아주면 상담하기 정말 편할 텐데. 자재 바꿔가면서 비용 비교도 바로 해주고.'"
+                </div>
+                
+                <div class="bg-green-50 p-3 rounded mt-3">
+                    <p><strong>PIC (Platform Impact Component):</strong></p>
+                    <p>이디자는 고객 상담 시 SnapPrice 기능을 적극 활용할 수 있다. 고객이 제시한 레퍼런스 사진이나 이디자가 만든 디자인 시안 이미지를 업로드하면, AI가 스타일, 마감재 등을 분석하여 예상 공사 비용 범위를 신속하게 제공한다. 다양한 자재 옵션에 따른 비용 변화도 시뮬레이션해볼 수 있어, 고객과 예산에 맞춰 현실적인 디자인을 조율하는 데 효과적이다. 또한, CodexHub를 통해 과거 프로젝트 데이터(도면, 견적, 사용 자재 등)를 체계적으로 관리하고 필요시 쉽게 검색하여 재활용할 수도 있다. 이는 고객 상담의 질을 높이고, 견적 작업 시간을 단축하며, 프로젝트 관리 효율성을 증대시킨다.</p>
+                </div>
+            </div>
+            
+            <h2>4.2. 핵심 이용 유인 분석 (페르소나별)</h2>
+            <p>각 페르소나가 SnapCodex를 사용하게 되는 핵심 동기(이용 유인)는 다음과 같이 요약될 수 있다:</p>
+            
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x400/f8f9fa/2c3e50?text=페르소나별+이용+유인+분석" alt="페르소나별 핵심 이용 유인 매트릭스">
+                <p class="image-caption">그림 4-2: 페르소나별 핵심 이용 유인 및 기대 효과 분석</p>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>페르소나</th>
+                        <th>핵심 Pain Point</th>
+                        <th>SnapCodex 이용 유인 (해결책)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>정아 건축사</td>
+                        <td>설계 변경 관리 어려움, 반복 작업</td>
+                        <td>Codex: 변경 이력 자동 관리, 데이터 구조화 / SnapPrice: 빠른 비용 검토</td>
+                    </tr>
+                    <tr>
+                        <td>김주무</td>
+                        <td>검토 어려움, 예산 근거 부족, 투명성↓</td>
+                        <td>Codex/Snap/Delta: 표준화된 데이터 제공, 이력 관리, 객관적 비교 근거</td>
+                    </tr>
+                    <tr>
+                        <td>오건무</td>
+                        <td>입찰 시간 부족, 견적 오류 위험, 비효율</td>
+                        <td>Codex: 물량 자동 산출 / SnapPrice: 신속 견적 시뮬레이션, 정확도↑</td>
+                    </tr>
+                    <tr>
+                        <td>박소장</td>
+                        <td>현장 오류, 소통 비효율, 공정 관리↑</td>
+                        <td>Codex: 최신 도면 접근 / Delta: 실시간 변경 공유 / Echo: 즉시 알림</td>
+                    </tr>
+                    <tr>
+                        <td>김현장</td>
+                        <td>작업 혼선, 도면 해독 어려움</td>
+                        <td>Codex: 시공자용 간소화 뷰어 / Delta/Echo: 변경 사항 즉시 인지</td>
+                    </tr>
+                    <tr>
+                        <td>이디자</td>
+                        <td>예산 조율 어려움, 견적 시간↑, 관리↓</td>
+                        <td>SnapPrice: 이미지 기반 빠른 견적, 비용 시뮬 / Codex: 프로젝트 데이터 관리</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h2>4.3. 주요 사용 시나리오</h2>
+            <p>SnapCodex 플랫폼이 실제 업무에서 어떻게 활용될 수 있는지 보여주는 주요 시나리오는 다음과 같다:</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1572021335469-31706a17aaef?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="사용자 시나리오 흐름도">
+                <p class="image-caption">그림 4-3: SnapCodex 주요 사용 시나리오 흐름도</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>시나리오 1: 인테리어 디자이너(이디자)의 초기 고객 상담</h4>
+                <p>고객이 보여주는 레퍼런스 사진을 SnapPrice에 업로드 → AI가 즉시 스타일, 주요 마감재 분석 및 대략적인 예상 비용 범위 제시 → 고객은 빠른 피드백에 만족하고, 이디자는 예산 기반의 현실적인 디자인 상담 진행 가능.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>시나리오 2: 건축설계자(정아)의 설계 변경 관리</h4>
+                <p>수정된 .cdx 파일을 CodexHub에 업로드 → 시스템이 이전 버전과 비교하여 변경된 요소(예: 벽 길이, 창호 개수) 자동 감지 및 하이라이트 → 변경 로그 자동 생성 및 관련자(시공사, 견적팀)에게 알림(Echo) 전송 → 변경된 자재 수량 기반으로 SnapPrice에서 예상 비용 변동 확인.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>시나리오 3: 현장소장(박소장)의 시공 변경 감지 및 보고</h4>
+                <p>현장에서 불가피하게 설계와 다르게 시공된 부분(예: 마감재 변경)을 박소장이 모바일로 사진 촬영하여 업로드 → Delta Agent가 원본 설계 데이터(Codex)와 비교하여 차이점 자동 식별 → 변경 내역(사진 포함)과 예상 비용 영향(SnapPrice 연동)이 포함된 보고서 자동 생성 → 발주처(김주무) 및 설계자(정아)에게 보고 및 승인 요청.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>시나리오 4: 건설사 공무팀(오건무)의 입찰 견적 작성</h4>
+                <p>입찰 대상 프로젝트의 .dwg 도면 파일을 CodexHub에 업로드 → 주요 공종별 물량(면적, 길이, 개수 등) 자동 산출 → 산출된 물량에 회사 내부 단가 및 제경비율을 적용하여 SnapPrice에서 실행 견적 시뮬레이션 → 경쟁력 있는 입찰 가격 결정 지원 및 견적서 초안 생성.</p>
+            </div>
+            
+            <div class="feature-card">
+                <h4>시나리오 5: 시공자(김현장)의 작업 준비 및 확인</h4>
+                <p>현장에서 QR코드를 스캔하거나 작업 구역 번호를 입력 → 해당 구역의 시공 상세 정보(도면, 치수, 자재, 주의사항 등)가 스마트폰/태블릿에 시각적으로 표시됨 → 작업 전 필요한 사항 확인 및 준비 → 작업 중 궁금한 점 발생 시 해당 정보 즉시 참조 → 시공 완료 후 작업 결과 사진 업로드 (Delta 연동 가능).</p>
+            </div>
+        </section>
+        
+        <!-- 5. 플랫폼 기능 상세 설계 -->
+        <div class="section-divider"></div>
+        <section id="section5">
+            <h1>5. 플랫폼 기능 상세 설계</h1>
+            
+            <h2>5.1. 시스템 아키텍처 개요</h2>
+            <p>SnapCodex는 마이크로서비스 아키텍처(MSA)를 기반으로 하는 클라우드 네이티브 플랫폼으로 설계된다. 각 핵심 기능(CodexHub, SnapPrice, Delta 등)은 독립적인 서비스(또는 AI Agent)로 구성되어 유연한 확장, 배포, 유지보수를 가능하게 한다. 사용자 인터페이스(Web/Mobile)는 API Gateway를 통해 각 백엔드 서비스와 통신한다.</p>
+            
+            <div class="image-container">
+                <img src="https://via.placeholder.com/800x500/f8f9fa/2c3e50?text=SnapCodex+아키텍처+다이어그램" alt="SnapCodex 시스템 아키텍처 개요도">
+                <p class="image-caption">그림 5-1: SnapCodex 시스템 아키텍처 개요도</p>
+            </div>
+            
+            <p><strong>주요 구성 요소:</strong></p>
+            <ul>
+                <li><strong>프론트엔드 (Frontend):</strong> 사용자 인터페이스 제공 (웹 기반 우선 개발, 향후 모바일 앱 확장 고려)</li>
+                <li><strong>API 게이트웨이 (API Gateway):</strong> 외부 요청의 단일 진입점 역할, 라우팅, 인증, 로드 밸런싱 수행</li>
+                <li><strong>인증 서비스 (Authentication Service):</strong> 사용자 로그인, 회원가입, 접근 권한 관리</li>
+                <li><strong>Codex 서비스 (CodexHub):</strong> 파일 업로드, 파싱, 데이터 구조화, 관련 API 제공</li>
+                <li><strong>SnapPrice 서비스:</strong> 이미지 분석, 비용 예측 로직 수행, 관련 API 제공</li>
+                <li><strong>Delta 서비스:</strong> 변경 감지 로직 수행, 비교 분석 결과 제공</li>
+                <li><strong>Echo 서비스 (알림):</strong> 이벤트 기반 알림(Slack, 이메일 등) 발송</li>
+                <li><strong>Sage 서비스 (거버넌스):</strong> 데이터 버전 관리, 접근 로그 기록, 정책 관리</li>
+                <li><strong>데이터베이스 (Databases):</strong> 사용자 정보, 프로젝트 데이터, 분석 결과, 메타데이터 등 저장 (관계형 DB, NoSQL DB, Vector DB 등 목적에 맞게 조합)</li>
+                <li><strong>파일 스토리지 (File Storage):</strong> 원본 디자인 파일, 이미지 등 저장 (예: AWS S3)</li>
+                <li><strong>AI 모델 (AI Models):</strong> Codex 파싱, SnapPrice 분석, Delta 비교 등을 위한 기계학습/딥러닝 모델</li>
+            </ul>
+            
+            <h2>5.2. CodexHub 기능 상세</h2>
+            <p>CodexHub는 비정형 디자인 데이터를 정형화된 정보 자산으로 변환하는 SnapCodex의 핵심 엔진이다.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="CodexHub 데이터 구조화 과정">
+                <p class="image-caption">그림 5-2: CodexHub의 디자인 파일 분석 및 구조화 프로세스</p>
+            </div>
+            
+            <h3>5.2.1. 파일 입력 및 지원 포맷 (.cdx, .dwg 등)</h3>
+            <ul>
+                <li><strong>입력 방식:</strong> 웹 인터페이스 통한 파일 드래그앤드롭 또는 직접 선택 업로드, API 통한 업로드, 지정된 클라우드 스토리지(예: S3 버킷) 연동.</li>
+                <li><strong>지원 포맷 (MVP):</strong> 디자인인사이트 고유 포맷 <code>.cdx</code>, 산업 표준 <code>.dwg</code>.</li>
+                <li><strong>지원 포맷 (확장 계획):</strong> <code>.dxf</code>, <code>.skp</code> (SketchUp), <code>.rvt</code> (Revit), IFC(Industry Foundation Classes), PDF(벡터 기반 도면).</li>
+                <li><strong>처리 방식:</strong> 비동기(Asynchronous) 처리. 사용자는 파일 업로드 후 다른 작업을 할 수 있으며, 분석 완료 시 알림(Echo) 수신.</li>
+            </ul>
+            
+            <h3>5.2.2. AI 기반 파싱 및 데이터 구조화 (JSON 출력)</h3>
+            <ul>
+                <li><strong>파싱 엔진:</strong> Computer Vision(객체 탐지, 문자 인식-OCR), 기하학적 분석, 패턴 인식, 기계학습 기반 분류기(레이어, 블록 의미 추론) 등 복합 기술 활용.
+                    <ul>
+                        <li>1단계: 기본 요소 추출 (선, 원, 호, 문자, 블록 등)</li>
+                        <li>2단계: 기하학적 관계 분석 (연결성, 폐쇄 영역 등) 및 레이어 정보 활용</li>
+                        <li>3단계: 건축/인테리어 객체 인식 (벽, 문, 창, 기둥, 슬래브, 가구, 위생도기 등)</li>
+                        <li>4단계: 객체 속성 추출 (치수, 면적, 재료 정보-텍스트 기반, 위치 등)</li>
+                        <li>5단계: 공간(Room/Space) 정의 및 객체 귀속</li>
+                    </ul>
+                </li>
+                <li><strong>데이터 구조화:</strong> 분석 결과를 표준화된 JSON(JavaScript Object Notation) 형식으로 출력. 스키마는 확장성을 고려하여 설계하며, 공간 중심 또는 객체 중심으로 구성 가능. 메타데이터(프로젝트 정보, 파일 정보, 분석 시간 등) 포함.</li>
+                <li><strong>출력:</strong> API 응답, 웹 인터페이스 표시, 연동된 데이터베이스 저장.</li>
+            </ul>
+            
+            <div class="bg-gray-100 p-3 rounded overflow-auto" style="max-height: 400px;">
+                <pre><code>{
+  "metadata": {
+    "project_id": "P2023-0042",
+    "file_name": "2F_plan.cdx",
+    "analysis_timestamp": "2023-04-18T15:30:42Z",
+    "version": "1.0"
+  },
+  "spaces": [
+    {
+      "id": "room-101",
+      "name": "거실",
+      "type": "living",
+      "area": 24.5,
+      "perimeter": 19.8,
+      "height": 2.4,
+      "walls": ["wall-1001", "wall-1002", "wall-1003", "wall-1004"],
+      "doors": ["door-3001"],
+      "windows": ["window-2001", "window-2002"],
+      "fixtures": ["fixture-4001"]
+    },
+    // ... 더 많은 공간 정보
+  ],
+  "elements": {
+    "walls": [
+      {
+        "id": "wall-1001",
+        "length": 5.4,
+        "thickness": 0.2,
+        "height": 2.4,
+        "start_point": [0, 0],
+        "end_point": [5.4, 0],
+        "material": "석고보드",
+        "finish": "도배지"
+      },
+      // ... 더 많은 벽체 정보
+    ],
+    "doors": [ /* ... */ ],
+    "windows": [ /* ... */ ],
+    "fixtures": [ /* ... */ ]
+  }
+}</code></pre>
+            </div>
+            
+            <h3>5.2.3. 정보 추출 항목 (벽체, 문, 창, 면적, 마감재 등)</h3>
+            <ul>
+                <li><strong>기하 정보:</strong> 객체 유형(벽, 문, 창, 기둥, 계단 등), 위치(좌표), 크기(길이, 폭, 높이, 면적, 체적), 개수, 방향 등.</li>
+                <li><strong>공간 정보:</strong> 공간 ID, 공간 명칭(예: 거실, 침실1), 바닥 면적, 천장고, 둘레 길이 등.</li>
+                <li><strong>속성 정보:</strong> 재료/마감재(도면 내 텍스트, 해치 패턴, 레이어명 등에서 추론), 객체 ID/태그, 레이어 정보, 블록 속성 등.</li>
+                <li><strong>관계 정보:</strong> 객체 간 연결 관계(벽-벽, 벽-문), 공간 포함 관계 등.</li>
+                <li><strong>(확장):</strong> 설비 요소(배관, 덕트, 전기 설비 심볼 등), 구조 요소(철근, H빔 등).</li>
+            </ul>
+            
+            <h2>5.3. SnapPrice 기능 상세</h2>
+            <p>SnapPrice는 시각적 정보를 기반으로 비용을 예측하는 AI 엔진이다.</p>
+            
+            <div class="image-container">
+                <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="SnapPrice 이미지 분석 및 견적 예측">
+                <p class="image-caption">그림 5-3: SnapPrice의 이미지 분석 및 비용 예측 프로세스</p>
+            </div>
+            
+            <h3>5.3.1. 이미지 분석 (스타일
